@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Copies\Game_Copy.cs" />
     <Compile Include="Main\ModelMesh.cs" />
+    <Compile Include="Main\Modules\Camera.cs" />
     <Compile Include="Main\WafleEngine.cs" />
     <Compile Include="Main\ObjectManager.cs" />
     <Compile Include="Main\Shader.cs" />
@@ -81,19 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Models\Sphere.obj" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
-    <None Include="Shaders\shader.frag" />
-    <None Include="Shaders\shader.vert" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Textures\48188541372_243cf3d502_k.jpg" />
-    <Content Include="Textures\Grafiti.png" />
-    <Content Include="Textures\stone1.png" />
-    <Content Include="Textures\stone_wall.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AssimpNet.4.1.0\build\AssimpNet.targets" Condition="Exists('..\packages\AssimpNet.4.1.0\build\AssimpNet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

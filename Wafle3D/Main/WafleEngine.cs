@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using Assimp;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.ES30;
 using OpenTK.Input;
@@ -21,6 +22,8 @@ namespace Wafle3D.Main
         int VertexBufferObject;
         int VertexArrayObject;
         int ElementBufferObject;
+
+        int uvBuffer;
 
         int mouseX;
         int mouseY;
@@ -74,8 +77,8 @@ namespace Wafle3D.Main
         int pgmID;
 
         float[] vertices = { };
-        float[] verticeTexture = { };
-        float[] indices = { };
+        float[] texCoords = { };
+        int[] indices = { };
 
         float[] customVertices = { };
         float[] customTexCoords = { };
@@ -117,81 +120,22 @@ namespace Wafle3D.Main
         {
             _objectManager = new ObjectManager();
 
-            vertices = _objectManager.LoadObjToVertex(@"D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\Models\Cube.obj");
-            verticeTexture = _objectManager.LoadObjToTexcoords(@"D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\Models\Cube.obj");
-            indices = _objectManager.LoadObjToIndices(@"D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\Models\Cube.obj");
-
-            int x = 0;
-
-            int vCount = 0;
-            int vtCount = 0;
-            int length = (vertices.Length + verticeTexture.Length);
-
-            List<float> cv = new List<float>();
-
-            for (int i = 0; i < length; i++)
-            {
-                //Console.WriteLine(i + "  " + x);
-
-                if (x <= 2)
-                {
-                    if (vCount < vertices.Length)
-                        cv.Add(vertices[vCount]);
-                    else
-                        cv.Add(0);
-                    vCount++;
-                    //Console.Write(v[i] + ", ");
-                }
-                else
-                {
-                    if (vtCount < verticeTexture.Length)
-                        cv.Add(verticeTexture[vtCount]);
-                    else
-                        cv.Add(0);
-                    vtCount++;
-                    //Console.Write(vt[i / 4] + ", ");
-                }
-
-                //Console.Write(cv[i] + ", ");
-
-                x++;
-
-                if (x == 5)
-                {
-                    x = 0;
-                    //onsole.WriteLine(" ");
-                }
-            }
-
-            Console.WriteLine("cube: " + cubeVertices.Length + "  copy: " + cv.Count);
-            /*for (int i = 0; i < cv.Count; i++)
-            {
-                if (cubeVertices[i] == cv[i])
-                    Console.WriteLine("Good: " + i);
-                else
-                    Console.WriteLine("Bad: " + i);
-            }*/
-
-            customVertices = cv.ToArray();
-
-            VertexBufferObject = GL.GenBuffer();
-            VertexArrayObject = GL.GenVertexArray();
-            GL.GenBuffers(1, out ElementBufferObject);
-
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
 
-            texture1 = new Texture(@"D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\Textures\stone_wall.png");
-            texture2 = new Texture(@"D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\Textures\Grafiti.png");
+            texture1 = new Texture(@"Textures\stone_wall.png");
+            //texture2 = new Texture(@"Textures\Grafiti.png");
 
-            shader = new Shader(@"D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\Shaders\shader.vert", @"D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\Shaders\shader.frag");
+            shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
             texture1.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
-            shader.SetInt("texture1", 0);
+            //shader.SetInt("texture1", 0);
             //texture2.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture1);
-            shader.SetInt("texture2", 1);
+            //shader.SetInt("texture2", 1);
             shader.Use();
 
-            CreateVertexBuffer(0);
+            _objectManager.LoadModel(@"Models\Bite.fbx");
+
+            CreateVertexBuffer();
 
             base.OnLoad(e);
         }
@@ -223,30 +167,50 @@ namespace Wafle3D.Main
         float angleY = 0;
         float angleZ = 0;
 
-        float[] vertices2 = {
-             0.5f,  0.5f, 0.0f,  // top right
-             0.5f, -0.5f, 0.0f,  // bottom right
-            -0.5f, -0.5f, 0.0f,  // bottom left
-            -0.5f,  0.5f, 0.0f   // top left 
-        };
-
-        int[] indices2 = {  // note that we start from 0!
-            0, 3, 7,   // first triangle
-            5, 1, 5    // second triangle
-        };
-
-        private void CreateVertexBuffer(int id) 
+        private void CreateVertexBuffer() 
         {
+            vertices = _objectManager.GetVertices(0);
+            indices = _objectManager.GetIndices(0);
+            texCoords = _objectManager.GetTexCoords(0);
+
+            GL.GenVertexArrays(1, out VertexArrayObject);
+
             GL.BindVertexArray(VertexArrayObject);
 
+            Console.WriteLine(GL.GetError());
+
+            GL.GenBuffers(1, out VertexBufferObject);
+
             GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.DynamicDraw);
+
+            Console.WriteLine(GL.GetError());
+
+            GL.GenBuffers(1, out ElementBufferObject);
 
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, indices2.Length * sizeof(float), indices2, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(int), indices, BufferUsageHint.StaticDraw);
 
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+            Console.WriteLine(GL.GetError());
+
             GL.EnableVertexAttribArray(0);
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+
+            Console.WriteLine(GL.GetError());
+
+            GL.GenBuffers(1, out uvBuffer);
+
+            Console.WriteLine(texCoords.Length);
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, uvBuffer);
+            GL.BufferData(BufferTarget.ArrayBuffer, texCoords.Length * sizeof(float), texCoords, BufferUsageHint.StaticDraw);
+
+            Console.WriteLine(GL.GetError());
+
+            GL.EnableVertexAttribArray(1);
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+
+            Console.WriteLine(GL.GetError());
 
             //GL.BufferData(BufferTarget.ArrayBuffer, vt.Length * sizeof(float), vt, BufferUsageHint.StaticDraw);
             //GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
@@ -257,6 +221,8 @@ namespace Wafle3D.Main
         [Obsolete]
         private void RenderObject(Matrix4 position, Matrix4 rotation, Matrix4 scale, int id)
         {
+            
+
             /*Matrix4 RX = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(angleX));
             Matrix4 RY = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(angleY));
             Matrix4 RZ = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(angleZ));
@@ -272,21 +238,25 @@ namespace Wafle3D.Main
             //Matrix4 trans = scale * rotation;
 
             //GL.BindVertexArray(VertexArrayObject);
-            //shader.Use();
+            shader.Use();
             GL.BindVertexArray(VertexArrayObject);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
-            GL.DrawElements(All.Triangles, vertices.Length, All.UnsignedInt, (IntPtr)0);
-            //GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
+            GL.DrawElements(All.Triangles, indices.Length, All.UnsignedInt, (IntPtr)0);
+            //GL.DrawArrays(All.Triangles, 0, indices.Length);
             //GL.BindVertexArray(0);
 
             //shader.SetMatrix4("transform", trans);
 
             shader.SetMatrix4("rotation", rotation);
+            Console.WriteLine(GL.GetError());
             shader.SetMatrix4("position", position);
+            Console.WriteLine(GL.GetError());
             shader.SetMatrix4("scale", scale);
+            Console.WriteLine(GL.GetError());
             shader.SetMatrix4("projection", projection);
+            Console.WriteLine(GL.GetError());
 
-            
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -301,7 +271,9 @@ namespace Wafle3D.Main
 
             Matrix4 rotation = RX * RY * RZ;
 
-            RenderObject(Matrix4.CreateTranslation(0.0f, 0.0f, -4.0f), rotation, Matrix4.CreateScale(0.5f, 0.5f, 0.5f), 0);
+            //CreateVertexBuffer();
+
+            RenderObject(Matrix4.CreateTranslation(0.0f, 0.0f, -6.0f), rotation, Matrix4.CreateScale(0.5f, 0.5f, 0.5f), 0);
             //RenderObject(Matrix4.CreateTranslation(-1.0f, 0.0f, -3.0f), rotation, Matrix4.CreateScale(0.5f, 0.5f, 0.5f), 0);
             //RenderObject(Matrix4.CreateTranslation(0.0f, -1.0f, -3.0f), rotation, Matrix4.CreateScale(0.5f, 1f, 0.5f), 0);
             //RenderObject(Matrix4.CreateTranslation(0.0f, 1.0f, -5.0f), rotation, Matrix4.CreateScale(0.5f, 0.5f, 0.5f), 0);

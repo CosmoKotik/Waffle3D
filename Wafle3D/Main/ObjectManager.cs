@@ -107,8 +107,6 @@ namespace Wafle3D.Main
             {
                 string diffusePath = Path.GetDirectoryName(path) + @"\" + Path.GetFileName(scene.Materials[0].TextureDiffuse.FilePath);
 
-                Console.WriteLine(scene.Materials[0].TextureAmbient.FilePath);
-
                 if (!Directory.Exists(diffusePath))
                     diffusePath = null;
 

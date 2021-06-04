@@ -11,7 +11,6 @@ namespace Wafle3D.Main
     class Texture
     {
         int Handle;
-        bool success = false;
 
         List<Image<Rgba32>> images = new List<Image<Rgba32>>();
         List<byte[]> pix = new List<byte[]>();
@@ -32,16 +31,12 @@ namespace Wafle3D.Main
             try
             {
                 if (path == null)
-                {
-                    Console.WriteLine("empty");
                     path = @"Textures\gray.png";
-                }
 
                 using (Image<Rgba32> image = Image.Load<Rgba32>(path))
                 {
                     image.Mutate(x => x.Flip(FlipMode.Vertical));
 
-                    //Convert ImageSharp's format into a byte array, so we can use it with OpenGL.
                     List<byte> pixels = new List<byte>(4 * image.Width * image.Height);
 
                     for (int y = 0; y < image.Height; y++)
@@ -80,8 +75,6 @@ namespace Wafle3D.Main
 
         public void loadTexture(int id)
         {
-            //GL.BindTexture(TextureTarget.Texture2D, Handle);
-
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, images[id].Width, images[id].Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pix[id]);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMinFilter.Linear);

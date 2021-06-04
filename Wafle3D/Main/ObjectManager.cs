@@ -102,7 +102,14 @@ namespace Wafle3D.Main
             modelMesh.texCoords = texCoords.ToArray();
 
             modelMesh.size = indices.Count;
-            modelMesh.diffusePath = scene.Materials[0].TextureDiffuse.FilePath;
+
+            if (scene.Materials[0].TextureDiffuse.FilePath != null)
+            {
+                string diffusePath = Path.GetDirectoryName(path) + @"\" + Path.GetFileName(scene.Materials[0].TextureDiffuse.FilePath);
+                Console.WriteLine(diffusePath);
+                modelMesh.diffusePath = diffusePath;
+            }
+
             modelMesh.id = _models.Count;
 
             _models.Add(modelMesh);

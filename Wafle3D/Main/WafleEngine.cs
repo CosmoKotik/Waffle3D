@@ -36,6 +36,8 @@ namespace Wafle3D.Main
 
         private List<ModelMesh> _models = new List<ModelMesh>();
 
+        Texture texture;
+
         public WafleEngine(int width, int height, string title) : base(width, height, GraphicsMode.Default, title)
         {
             Console.WriteLine("Starting");
@@ -68,6 +70,7 @@ namespace Wafle3D.Main
             //texture2 = new Texture(@"Textures\Grafiti.png");
 
             shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
+            texture = new Texture();
             //texture1.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
             //shader.SetInt("texture1", 0);
             //texture2.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture1);
@@ -78,21 +81,19 @@ namespace Wafle3D.Main
             //Console.WriteLine("Diek: " + _objectManager.LoadModel(@"Models\Bite.fbx"));
             //Console.WriteLine("Cube: " + _objectManager.LoadModel(@"Models\Cube.obj"));
 
-            Texture texture = new Texture(@"Models\Mario64\Toad\Toad_grp.png");
-            texture.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
-            shader.SetInt("texture1", 0);
-            shader.Use();
+            //Texture texture = new Texture(@"Models\Mario64\Toad\Toad_grp.png");
+            //texture.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+            ////shader.SetInt("texture1", 0);
+            //shader.Use();
 
-            GL.GenBuffers(1, out VertexBufferObject);
+            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Cube.fbx"), Matrix4.CreateTranslation(0.0f, -2.0f, -4.0f), Matrix4.CreateRotationX(0)));
+            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Toad\Toad.obj"), Matrix4.CreateTranslation(-3.0f, -10.0f, -100.0f), Matrix4.CreateRotationX(0)));
+            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Goomba\Goomba.fbx"), Matrix4.CreateTranslation(3.0f, 0.0f, -520.0f), Matrix4.CreateRotationX(0)));
+            //Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Mario\Goomba.fbx"), Matrix4.CreateTranslation(3.0f, 0.0f, -520.0f), Matrix4.CreateRotationX(0)));
 
-            Matrix4 RX = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0));
-            Matrix4 RY = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(180));
-            Matrix4 RZ = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(0));
-            Matrix4 rotation = RX * RY * RZ;
-
-            //Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Cube.obj"), Matrix4.CreateTranslation(0.0f, -2.0f, -5f), Matrix4.CreateRotationX(180)));
-            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Toad\Toad.obj"), Matrix4.CreateTranslation(-3.0f, -10.0f, -100.0f), rotation));
-            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Goomba\Goomba.fbx"), Matrix4.CreateTranslation(3.0f, 40.0f, -500.0f), Matrix4.CreateRotationX(180)));
+            SetTexture(@"Models\gray.png", 0);
+            SetTexture(@"Models\Mario64\Toad\Toad_grp.png", 1);
+            SetTexture(@"Models\Mario64\Goomba\GoombaTex.png", 2);
 
             base.OnLoad(e);
         }
@@ -111,6 +112,7 @@ namespace Wafle3D.Main
             GL.GenVertexArrays(1, out VertexArrayObject);
             GL.GenBuffers(1, out VertexBufferObject);
             GL.GenBuffers(1, out ElementBufferObject);
+
             mesh.vao = VertexArrayObject;
             mesh.ebo = ElementBufferObject;
             mesh.vbo = VertexBufferObject;
@@ -125,6 +127,16 @@ namespace Wafle3D.Main
             return mesh.id;
         }
 
+        public void SetRotation(Matrix4 rotation, int id)
+        {
+            _models[id].rotation = rotation;
+        }
+
+        public void SetTexture(string path, int id)
+        {
+            _models[id].diffusePath = path;
+            texture.AddTexture(path, true, id);
+        }
 
         float angleX = 0;
         float angleY = 0;
@@ -133,6 +145,8 @@ namespace Wafle3D.Main
         private void CreateVertexBuffer(ModelMesh mesh) 
         {
             //ModelMesh mesh = _models[id];
+            Console.WriteLine(mesh.diffusePath);
+            texture.AddTexture(mesh.diffusePath);
 
             vertices = mesh.vertices;
             indices = mesh.indices;
@@ -140,16 +154,16 @@ namespace Wafle3D.Main
 
             //GL.GenVertexArrays(1, out VertexArrayObject);
 
-            GL.BindVertexArray(mesh.vao);
+            GL.BindVertexArray(VertexArrayObject);
 
             //GL.GenBuffers(1, out VertexBufferObject);
 
-            GL.BindBuffer(BufferTarget.ArrayBuffer, mesh.vbo);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
             GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
 
             //GL.GenBuffers(1, out ElementBufferObject);
 
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, mesh.ebo);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(int), indices, BufferUsageHint.StaticDraw);
 
             GL.EnableVertexAttribArray(0);
@@ -163,14 +177,17 @@ namespace Wafle3D.Main
             GL.EnableVertexAttribArray(1);
             GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
 
-            //GL.BindVertexArray(0);
+            GL.BindVertexArray(0);
 
         }
 
-        [Obsolete]
         private void RenderObject(Matrix4 position, Matrix4 rotation, Matrix4 scale, int id)
         {
             ModelMesh mesh = _models[id];
+
+            texture.loadTexture(id);
+            texture.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+            shader.Use();
 
             /*Matrix4 RX = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(angleX));
             Matrix4 RY = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(angleY));
@@ -217,11 +234,19 @@ namespace Wafle3D.Main
 
             Matrix4 rotation = RX * RY * RZ;
 
+            SetRotation(rotation, 1);
+            SetRotation(rotation, 2);
+
             //CreateVertexBuffer();
 
             for (int i = 0; i < _models.Count; i++)
-            { 
-                RenderObject(_models[i].position, rotation, _models[i].scale, _models[i].id);
+            {
+                Matrix4 pos = _models[(_models.Count - 1) - i].position;
+                Matrix4 rot = _models[(_models.Count - 1) - i].rotation;
+                Matrix4 scale = _models[(_models.Count - 1) - i].scale;
+                int id = _models[i].id;
+
+                RenderObject(pos, rot, scale, id);
             }
             //RenderObject(Matrix4.CreateTranslation(-3.0f, -2.0f, -5.0f), rotation, Matrix4.CreateScale(0.1f, 0.1f, 0.1f), 1);
             //RenderObject(Matrix4.CreateTranslation(3.0f, -2.0f, -662.0f), rotation, Matrix4.CreateScale(1f, 1f, 1f), 2);

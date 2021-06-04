@@ -13,55 +13,78 @@ namespace Wafle3D.Main
         int Handle;
         bool success = false;
 
-        public Texture(string path) 
+        List<Image<Rgba32>> images = new List<Image<Rgba32>>();
+        List<byte[]> pix = new List<byte[]>();
+
+        public Texture() 
         {
             Handle = GL.GenTexture();
-
-            try
-            {
-                Image<Rgba32> image = Image.Load<Rgba32>(path);
-
-                //ImageSharp loads from the top-left pixel, whereas OpenGL loads from the bottom-left, causing the texture to be flipped vertically.
-                //This will correct that, making the texture display properly.
-                image.Mutate(x => x.Flip(FlipMode.Vertical));
-
-                //Convert ImageSharp's format into a byte array, so we can use it with OpenGL.
-                var pixels = new List<byte>(4 * image.Width * image.Height);
-
-                for (int y = 0; y < image.Height; y++)
-                {
-                    var row = image.GetPixelRowSpan(y);
-
-                    for (int x = 0; x < image.Width; x++)
-                    {
-                        pixels.Add(row[x].R);
-                        pixels.Add(row[x].G);
-                        pixels.Add(row[x].B);
-                        pixels.Add(row[x].A);
-                    }
-                }
-                GL.BindTexture(TextureTarget.Texture2D, Handle);
-
-                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.Width, image.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pixels.ToArray());
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMinFilter.Linear);
-
-                success = true;
-            }
-            catch (Exception e)
-            {
-                success = false;
-                Console.WriteLine(e.ToString());
-            }
         }
 
         public void Use(TextureUnit unit = TextureUnit.Texture0)
         {
-            if (success)
+            GL.ActiveTexture(unit);
+            GL.BindTexture(TextureTarget.Texture2D, Handle);
+        }
+
+        public int AddTexture(string path, bool isSetting = false, int id = 0)
+        {
+            try
             {
-                GL.ActiveTexture(unit);
-                GL.BindTexture(TextureTarget.Texture2D, Handle);
+                if (path == null)
+                {
+                    Console.WriteLine("empty");
+                    path = @"Textures\gray.png";
+                }
+
+                using (Image<Rgba32> image = Image.Load<Rgba32>(path))
+                {
+                    image.Mutate(x => x.Flip(FlipMode.Vertical));
+
+                    //Convert ImageSharp's format into a byte array, so we can use it with OpenGL.
+                    List<byte> pixels = new List<byte>(4 * image.Width * image.Height);
+
+                    for (int y = 0; y < image.Height; y++)
+                    {
+                        var row = image.GetPixelRowSpan(y);
+
+                        for (int x = 0; x < image.Width; x++)
+                        {
+                            pixels.Add(row[x].R);
+                            pixels.Add(row[x].G);
+                            pixels.Add(row[x].B);
+                            pixels.Add(row[x].A);
+                        }
+                    }
+                    GL.BindTexture(TextureTarget.Texture2D, Handle);
+
+                    if (!isSetting)
+                    {
+                        images.Add(image);
+                        pix.Add(pixels.ToArray());
+                    }
+                    else
+                    {
+                        images[id] = image;
+                        pix[id] = pixels.ToArray();
+                    }
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            return images.Count - 1;
+        }
+
+        public void loadTexture(int id)
+        {
+            //GL.BindTexture(TextureTarget.Texture2D, Handle);
+
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, images[id].Width, images[id].Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pix[id]);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMinFilter.Linear);
         }
     }
 }

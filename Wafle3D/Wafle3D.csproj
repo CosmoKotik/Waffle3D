@@ -71,17 +71,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Copies\Game_Copy.cs" />
-    <Compile Include="Game.cs" />
     <Compile Include="Main\ModelMesh.cs" />
     <Compile Include="Main\Modules\Camera.cs" />
     <Compile Include="Main\Modules\Input.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="Scripts\Test.cs" />
     <Compile Include="Main\Behaviour\WafleBehaviour.cs" />
     <Compile Include="Main\WafleEngine.cs" />
     <Compile Include="Main\ObjectManager.cs" />
     <Compile Include="Main\Shader.cs" />
     <Compile Include="Main\Texture.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Main\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

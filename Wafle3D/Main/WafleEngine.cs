@@ -15,9 +15,7 @@ using System.Threading.Tasks;
 
 using Wafle3D;
 using Wafle3D.Main.Modules;
-using static Wafle3D.Main.ObjectManager;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace Wafle3D.Main
 {
@@ -217,7 +215,7 @@ namespace Wafle3D.Main
             shader.Use();
 
             //Creating a camera perspective view
-            Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(80f), Width / (float)Height, 0.01f, 10000.0f);
+            Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), Width / (float)Height, 0.01f, 10000.0f);
 
             //Binding the vertexes and the buffers, then clearing it
             GL.BindVertexArray(mesh.vao);
@@ -231,11 +229,21 @@ namespace Wafle3D.Main
             shader.SetMatrix4("scale", scale);
             shader.SetMatrix4("projection", projection);
         }
-
+        float kx = 0, ky = 0, mx = 0, my = 0;
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            kx = Input.GetAxis("Keyboard X");
+            ky = Input.GetAxis("Keyboard Y");
+            my = Input.GetAxis("Mouse Y") * 0.1f;
+            mx = Input.GetAxis("Mouse X") * 0.1f;
+
+            cam.MoveCamera(new Vector3(kx, 0, ky));
+            cam.UpdateCamera();
+            cam.RotateCamera(new Vector3(mx, 0, my));
+            cam.UpdateCamera();
 
             int m_id = 0;
             for (int i = 0; i < _models.Count; i++)
@@ -251,9 +259,9 @@ namespace Wafle3D.Main
 
                 int id = _models[i].id;
 
-                RenderObject(pos + cam.MoveCamera(new Vector3(1, 2, 1)), rot, scale, id);
+                RenderObject(pos * cam.GetView(), rot, scale, id);
             }
-
+            
             Context.SwapBuffers();
             base.OnRenderFrame(e);
         }

@@ -1,5 +1,4 @@
-﻿using Assimp;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.ES30;
 using OpenTK.Input;
@@ -13,7 +12,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Wafle3D;
+using Wafle3D.Main.Modules;
 using static Wafle3D.Main.ObjectManager;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Wafle3D.Main
 {
@@ -24,18 +28,23 @@ namespace Wafle3D.Main
         int ElementBufferObject;
         int uvBuffer;
 
-        private ObjectManager _objectManager;
+        public ObjectManager ObjectManager;
+        private Camera cam;
 
         private List<ModelMesh> _models = new List<ModelMesh>();
 
         Texture texture;
+        Shader shader;
+
+        Vector3 camPos;
+
+        private List<string> Scripts = new List<string>();
 
         public WafleEngine(int width, int height, string title) : base(width, height, GraphicsMode.Default, title)
         {
             Console.WriteLine("Starting");
         }
 
-        Shader shader;
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             KeyboardState input = Keyboard.GetState();
@@ -45,25 +54,54 @@ namespace Wafle3D.Main
                 Exit();
             }
 
+            for (int i = 0; i < Scripts.Count; i++)
+            {
+                //Invoking the external script
+                Type scriptType = Type.GetType(Scripts[i]);
+                ConstructorInfo scriptConstructor = scriptType.GetConstructor(Type.EmptyTypes);
+                WafleBehaviour scriptObject = (WafleBehaviour)scriptConstructor.Invoke(new object[] { });
+
+                //Calling OnUpdate() method
+                scriptObject.OnUpdate();
+            }
+
             base.OnRenderFrame(e);
         }
 
         protected override void OnLoad(EventArgs e)
         {
             //Initializing object manager, texture and shaders
-            _objectManager = new ObjectManager();
+            ObjectManager = new ObjectManager();
             shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
             texture = new Texture();
+            cam = new Camera();
+
+            //Adding scripts
+            Scripts.Add("Test");
+
+            for (int i = 0; i < Scripts.Count; i++)
+            {
+                //Invoking the external script
+                Type scriptType = Type.GetType(Scripts[i]);
+                ConstructorInfo scriptConstructor = scriptType.GetConstructor(Type.EmptyTypes);
+                WafleBehaviour scriptObject = (WafleBehaviour)scriptConstructor.Invoke(new object[] { });
+
+                //Setting the gameEngine
+                scriptObject.gameEngine = this;
+                //Calling OnLoad() method
+                scriptObject.OnLoad();
+            }
+
 
             //Enabling DepthTest
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Lequal);
 
             //Adding objects and displaying the id
-            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Cube.fbx"), Matrix4.CreateTranslation(0.0f, -3.0f, -4.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
-            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Toad\Toad.obj"), Matrix4.CreateTranslation(100.0f, 0.0f, -533.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
-            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Goomba\Goomba.fbx"), Matrix4.CreateTranslation(-10.0f, 0.0f, -10.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90))));
-            Console.WriteLine("id: " + AddObject(_objectManager.LoadModel(@"Models\Mario64\Mario\Mario.fbx"), Matrix4.CreateTranslation(150.0f, 0.0f, -422.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Cube.fbx"), Matrix4.CreateTranslation(0.0f, -3.0f, -4.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Mario64\Toad\Toad.obj"), Matrix4.CreateTranslation(100.0f, 0.0f, -533.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Mario64\Goomba\Goomba.fbx"), Matrix4.CreateTranslation(-10.0f, 0.0f, -10.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Mario64\Mario\Mario.fbx"), Matrix4.CreateTranslation(150.0f, 0.0f, -422.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180))));
 
             //Setting custom textures to the objects
             SetTexture(@"Models\gray.png", 0);
@@ -94,7 +132,7 @@ namespace Wafle3D.Main
             base.OnUnload(e);
         }
 
-        public int AddObject(ModelMesh mesh, Matrix4 position, Matrix4 rotation)
+        public int CreateObject(ModelMesh mesh, Matrix4 position, Matrix4 rotation)
         {
             GL.GenVertexArrays(1, out VertexArrayObject);
             GL.GenBuffers(1, out VertexBufferObject);
@@ -116,15 +154,21 @@ namespace Wafle3D.Main
 
         public void SetRotation(Matrix4 rotation, int id)
         {
-            //Setting the rotation for a model
+            //Setting the rotation of an object from the outside
             _models[id].rotation = rotation;
         }
 
         public void SetTexture(string path, int id)
         {
-            //Setting a custom texture for a model
+            //Setting a custom texture of an object from the outside
             _models[id].diffusePath = path;
             texture.AddTexture(path, true, id);
+        }
+
+        public void SetPosition(Vector3 position, int id)
+        {
+            //Set the position of an object from the outside
+            _models[id].position = Matrix4.CreateTranslation(position);
         }
 
         private void CreateVertexBuffer(ModelMesh mesh) 
@@ -207,7 +251,7 @@ namespace Wafle3D.Main
 
                 int id = _models[i].id;
 
-                RenderObject(pos, rot, scale, id);
+                RenderObject(pos + cam.MoveCamera(new Vector3(1, 2, 1)), rot, scale, id);
             }
 
             Context.SwapBuffers();

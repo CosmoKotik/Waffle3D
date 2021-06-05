@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wafle3D.Main;
 
-namespace Wafle3D
+namespace Wafle3D.Main
 {
     class Program
     {

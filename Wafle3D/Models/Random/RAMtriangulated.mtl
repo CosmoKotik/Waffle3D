@@ -1,0 +1,115 @@
+# Blender MTL File: 'RAMtriangulated.blend'
+# Material Count: 10
+
+newmtl Material.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.002
+Ns 506.250000
+Ka 0.750000 0.750000 0.750000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd d2m1tsy-dbc113cb-769c-4e1c-bfbb-6886a8bb1663.png
+
+newmtl Material.003
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.039546 0.039546 0.039546
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump brushed-metal-bl\\brushed-metal-bl\\brushed-metal_normal-ogl.png
+map_Ns brushed-metal-bl\\brushed-metal-bl\\brushed-metal_roughness.png
+refl brushed-metal-bl\\brushed-metal-bl\\brushed-metal_metallic.png
+
+newmtl Material.004
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.039546 0.039546 0.039546
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump brushed-metal-bl\\brushed-metal-bl\\brushed-metal_normal-ogl.png
+map_Ns brushed-metal-bl\\brushed-metal-bl\\brushed-metal_roughness.png
+refl brushed-metal-bl\\brushed-metal-bl\\brushed-metal_metallic.png
+
+newmtl Material.006
+Ns 575.999996
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl Material.008
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.039546 0.039546 0.039546
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump brushed-metal-bl\\brushed-metal-bl\\brushed-metal_normal-ogl.png
+map_Ns brushed-metal-bl\\brushed-metal-bl\\brushed-metal_roughness.png
+refl brushed-metal-bl\\brushed-metal-bl\\brushed-metal_metallic.png
+
+newmtl Material.009
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.010
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl Material.012
+Ns 506.250000
+Ka 1.000000 1.000000 1.000000
+Kd 0.250158 0.234551 0.068478
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl Material.013
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.039546 0.039546 0.039546
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump brushed-metal-bl\\brushed-metal-bl\\brushed-metal_normal-ogl.png
+map_Ns brushed-metal-bl\\brushed-metal-bl\\brushed-metal_roughness.png
+refl brushed-metal-bl\\brushed-metal-bl\\brushed-metal_metallic.png

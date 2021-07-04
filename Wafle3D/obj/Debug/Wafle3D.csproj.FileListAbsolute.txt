@@ -1,52 +1,79 @@
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\Wafle3D.exe.config
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\Wafle3D.exe
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\Wafle3D.pdb
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\OpenTK.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\OpenTK.GLControl.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\OpenTK.pdb
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\OpenTK.xml
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\OpenTK.GLControl.pdb
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\OpenTK.GLControl.xml
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CoreCompileInputs.cache
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CopyComplete
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.exe
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.pdb
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\SixLabors.ImageSharp.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Buffers.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Memory.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Numerics.Vectors.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\SixLabors.ImageSharp.xml
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Buffers.xml
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Memory.xml
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Numerics.Vectors.xml
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.csprojAssemblyReference.cache
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\AssimpNet.dll
-D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\AssimpNet.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\Wafle3D.exe.config
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\Wafle3D.exe
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\Wafle3D.pdb
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\AssimpNet.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\OpenTK.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\OpenTK.GLControl.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\SixLabors.ImageSharp.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Buffers.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Memory.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Numerics.Vectors.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\AssimpNet.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\OpenTK.pdb
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\OpenTK.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\OpenTK.GLControl.pdb
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\OpenTK.GLControl.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\SixLabors.ImageSharp.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Buffers.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Memory.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Numerics.Vectors.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csprojAssemblyReference.cache
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CoreCompileInputs.cache
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CopyComplete
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.exe
-D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.pdb
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/Wafle3D.exe.config
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/Wafle3D.exe
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/Wafle3D.pdb
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/OpenTK.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/OpenTK.GLControl.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/OpenTK.pdb
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/OpenTK.xml
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/OpenTK.GLControl.pdb
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/OpenTK.GLControl.xml
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/obj/Debug/Wafle3D.csproj.CoreCompileInputs.cache
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/obj/Debug/Wafle3D.csproj.CopyComplete
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/obj/Debug/Wafle3D.exe
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/obj/Debug/Wafle3D.pdb
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/SixLabors.ImageSharp.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Buffers.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Memory.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Numerics.Vectors.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Runtime.CompilerServices.Unsafe.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/SixLabors.ImageSharp.xml
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Buffers.xml
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Memory.xml
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Numerics.Vectors.xml
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/System.Runtime.CompilerServices.Unsafe.xml
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/obj/Debug/Wafle3D.csprojAssemblyReference.cache
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/AssimpNet.dll
+D:/DEV/Visual Sudio Projects/Wafle3D/Wafle3D/bin/Debug/AssimpNet.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/Wafle3D.exe.config
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/Wafle3D.exe
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/Wafle3D.pdb
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/AssimpNet.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/OpenTK.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/OpenTK.GLControl.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/SixLabors.ImageSharp.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Buffers.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Memory.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Numerics.Vectors.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Runtime.CompilerServices.Unsafe.dll
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/AssimpNet.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/OpenTK.pdb
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/OpenTK.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/OpenTK.GLControl.pdb
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/OpenTK.GLControl.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/SixLabors.ImageSharp.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Buffers.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Memory.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Numerics.Vectors.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/bin/Debug/System.Runtime.CompilerServices.Unsafe.xml
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/obj/Debug/Wafle3D.csprojAssemblyReference.cache
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/obj/Debug/Wafle3D.csproj.CoreCompileInputs.cache
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/obj/Debug/Wafle3D.csproj.CopyComplete
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/obj/Debug/Wafle3D.exe
+D:/DEV/Visual Sudio Projects/Waffle3D/Wafle3D/obj/Debug/Wafle3D.pdb
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/Wafle3D.exe.config
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/Wafle3D.exe
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/Wafle3D.pdb
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/AssimpNet.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/OpenTK.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/OpenTK.GLControl.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/SixLabors.ImageSharp.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Buffers.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Memory.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Numerics.Vectors.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Runtime.CompilerServices.Unsafe.dll
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/AssimpNet.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/OpenTK.pdb
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/OpenTK.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/OpenTK.GLControl.pdb
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/OpenTK.GLControl.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/SixLabors.ImageSharp.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Buffers.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Memory.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Numerics.Vectors.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/bin/Debug/System.Runtime.CompilerServices.Unsafe.xml
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/obj/Debug/Wafle3D.csproj.AssemblyReference.cache
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/obj/Debug/Wafle3D.exe.config
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/obj/Debug/Wafle3D.csproj.CoreCompileInputs.cache
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/obj/Debug/Wafle3D.csproj.CopyComplete
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/obj/Debug/Wafle3D.exe
+/Users/cosmokotik/Documents/Dev/Waffle3D/Wafle3D/obj/Debug/Wafle3D.pdb

@@ -68,7 +68,7 @@ namespace Wafle3D.Core
         {
             //Initializing object manager, texture and shaders
             ObjectManager = new ObjectManager();
-            shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
+            shader = new Shader(@"Shaders/shader.vert", @"Shaders/shader.frag");
             texture = new Texture();
             cam = new Camera();
 
@@ -96,18 +96,18 @@ namespace Wafle3D.Core
             GL.DepthFunc(DepthFunction.Lequal);
 
             //Adding objects and displaying the id
-            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Cube.fbx"), Matrix4.CreateTranslation(0.0f, -3.0f, -4.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
-            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Mario64\Toad\Toad.obj"), Matrix4.CreateTranslation(100.0f, 0.0f, -533.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
-            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Mario64\Goomba\Goomba.fbx"), Matrix4.CreateTranslation(-10.0f, 0.0f, -10.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90))));
-            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models\Mario64\Mario\Mario.fbx"), Matrix4.CreateTranslation(150.0f, 0.0f, -422.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), Matrix4.CreateTranslation(0.0f, -3.0f, -4.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), Matrix4.CreateTranslation(100.0f, 0.0f, -533.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), Matrix4.CreateTranslation(-10.0f, 0.0f, -10.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90))));
+            Console.WriteLine("id: " + CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), Matrix4.CreateTranslation(150.0f, 0.0f, -422.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180))));
 
             
 
             //Setting custom textures to the objects
-            SetTexture(@"Models\gray.png", 0);
-            SetTexture(@"Models\Mario64\Toad\Toad_grp.png", 1);
-            SetTexture(@"Models\Mario64\Goomba\GoombaTex.png", 2);
-            SetTexture(@"Models\Mario64\Mario\Mario64Body_alb.png", 3);
+            SetTexture(@"Models/gray.png", 0);
+            SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
+            SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
+            SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
 
             base.OnLoad(e);
         }

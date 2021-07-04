@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -90,9 +90,47 @@
     <None Include="App.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
+    <None Include="Textures\48188541372_243cf3d502_k.jpg" />
+    <None Include="Textures\Grafiti.png" />
+    <None Include="Textures\gray.png" />
+    <None Include="Textures\stone_wall.png" />
+    <None Include="Textures\stone1.png" />
+    <None Include="Debug\Models\Bite.fbx" />
+    <None Include="Debug\Models\Cube.fbx" />
+    <None Include="Debug\Models\Cube.obj" />
+    <None Include="Debug\Models\Cube.txt" />
+    <None Include="Debug\Models\gray.png" />
+    <None Include="Debug\Models\jeep.obj" />
+    <None Include="Debug\Models\Mario64\Goomba\Goomba.fbx" />
+    <None Include="Debug\Models\Mario64\Goomba\GoombaEyesTex.png" />
+    <None Include="Debug\Models\Mario64\Goomba\GoombaTex.png" />
+    <None Include="Debug\Models\Mario64\Mario\Mario.fbx" />
+    <None Include="Debug\Models\Mario64\Mario\Mario64Body_alb.png" />
+    <None Include="Debug\Models\Mario64\Mario\Mario64Cap_alb.png" />
+    <None Include="Debug\Models\Mario64\Mario\Mario64Eye_alb.0.png" />
+    <None Include="Debug\Models\Mario64\Mario\Mario64Face_alb.png" />
+    <None Include="Debug\Models\Mario64\Mario\Mario64Hand_alb.png" />
+    <None Include="Debug\Models\Mario64\Toad\Toad.obj" />
+    <None Include="Debug\Models\Mario64\Toad\Toad_grp.png" />
+    <None Include="Debug\Models\Pumpkin.obj" />
+    <None Include="Debug\Models\Random\brushed-metal_albedo.png" />
+    <None Include="Debug\Models\Random\brushed-metal_ao.png" />
+    <None Include="Debug\Models\Random\brushed-metal_metallic.png" />
+    <None Include="Debug\Models\Random\brushed-metal_normal-ogl.png" />
+    <None Include="Debug\Models\Random\brushed-metal_preview.jpg" />
+    <None Include="Debug\Models\Random\brushed-metal_roughness.png" />
+    <None Include="Debug\Models\Random\d2m1tsy-dbc113cb-769c-4e1c-bfbb-6886a8bb1663.png" />
+    <None Include="Debug\Models\Random\istockphoto-913859380-1024x1024.jpg" />
+    <None Include="Debug\Models\Random\RAMtriangulated.mtl" />
+    <None Include="Debug\Models\Random\RAMtriangulated.obj" />
+    <None Include="Debug\Models\Sphere.obj" />
+    <None Include="Debug\Shaders\shader.frag" />
+    <None Include="Debug\Shaders\shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Main\" />
+    <Folder Include="Textures\" />
+    <Folder Include="Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AssimpNet.4.1.0\build\AssimpNet.targets" Condition="Exists('..\packages\AssimpNet.4.1.0\build\AssimpNet.targets')" />

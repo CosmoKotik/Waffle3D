@@ -31,7 +31,7 @@ namespace Wafle3D.Core
             try
             {
                 if (path == null)
-                    path = @"Textures\gray.png";
+                    path = @"Textures/gray.png";
 
                 using (Image<Rgba32> image = Image.Load<Rgba32>(path))
                 {

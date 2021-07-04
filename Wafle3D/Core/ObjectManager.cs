@@ -71,7 +71,7 @@ namespace Wafle3D.Core
 
             if (scene.Materials[0].TextureDiffuse.FilePath != null)
             {
-                string diffusePath = Path.GetDirectoryName(path) + @"\" + Path.GetFileName(scene.Materials[0].TextureDiffuse.FilePath);
+                string diffusePath = Path.GetDirectoryName(path) + @"/" + Path.GetFileName(scene.Materials[0].TextureDiffuse.FilePath);
 
                 if (!Directory.Exists(diffusePath))
                     diffusePath = null;

@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{98E2A552-CA88-4ABB-B695-46A5141FAF25}|Default">
+  <MonoDevelop.Ide.ItemProperties.Wafle3D PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Wafle3D/Core/Texture.cs">
+    <Files>
+      <File FileName="Wafle3D/Core/Program.cs" Line="1" Column="1" />
+      <File FileName="Wafle3D/Core/WafleEngine.cs" Line="102" Column="88" />
+      <File FileName="Wafle3D/Core/Shader.cs" Line="25" Column="1" />
+      <File FileName="Wafle3D/Core/ObjectManager.cs" Line="27" Column="1" />
+      <File FileName="Wafle3D/Core/Texture.cs" Line="78" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Wafle3D" expanded="True">
+            <Node name="Wafle3D" expanded="True">
+              <Node name="Core" expanded="True">
+                <Node name="Texture.cs" selected="True" />
+              </Node>
+              <Node name="Debug" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

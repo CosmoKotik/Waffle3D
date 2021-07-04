@@ -66,6 +66,8 @@ namespace Wafle3D.Core
 
         protected override void OnLoad(EventArgs e)
         {
+            Console.WriteLine(GL.GetString(All.Version));
+
             //Initializing object manager, texture and shaders
             ObjectManager = new ObjectManager();
             shader = new Shader(@"Shaders/shader.vert", @"Shaders/shader.frag");

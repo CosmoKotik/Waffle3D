@@ -1,4 +1,4 @@
-﻿#version 330 compatibility
+﻿#version 330
 
 out vec4 FragColor;
 

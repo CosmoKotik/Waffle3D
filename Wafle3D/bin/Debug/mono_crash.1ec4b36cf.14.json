@@ -1,0 +1,633 @@
+{
+  "protocol_version" : "0.0.6",
+  "configuration" : {
+    "version" : "(6.12.0.140) (2020-02/51d876a041e)",
+    "tlc" : "normal",
+    "sigsgev" : "altstack",
+    "notifications" : "kqueue",
+    "architecture" : "amd64",
+    "disabled_features" : "none",
+    "smallconfig" : "disabled",
+    "bigarrays" : "disabled",
+    "softdebug" : "enabled",
+    "interpreter" : "enabled",
+    "llvm_support" : "0",
+    "suspend" : "hybrid"
+  },
+  "memory" : {
+    "Resident Size" : "133922816",
+    "Virtual Size" : "4701794304",
+    "minor_gc_time" : "51466",
+    "major_gc_time" : "79711",
+    "minor_gc_count" : "1",
+    "major_gc_count" : "2",
+    "major_gc_time_concurrent" : "3253751"
+ },
+  "threads" : [
+ {
+    "is_managed" : false,
+    "offset_free_hash" : "0x1ec4b36cf",
+    "offset_rich_hash" : "0x1ec4b36cf",
+    "crashed" : true,
+    "native_thread_id" : "0x700006734000",
+    "thread_info_addr" : "0x7fa8d0831200",
+    "thread_name" : "Finalizer",
+    "ctx" : {
+      "IP" : "0x10c3ce801",
+      "SP" : "0x700006733cb0",
+      "BP" : "0x700006733cb0"
+  },
+    "unmanaged_frames" : [
+  {
+      "is_managed" : "false",
+      "native_address" : "0x109552956",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1096ee0d5",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1096ee74a",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1095bf9e7",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1095575ee",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1095b9896",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x10c3ce801",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x6003171",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "071BC7C5-DA63-40C4-82C2-50F48870ED7A",
+      "token" : "0x6000032",
+      "native_offset" : "0x0",
+      "filename" : "Wafle3D.exe",
+      "sizeofimage" : "0xc000",
+      "timestamp" : "0xb70f40e6",
+      "il_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "92218043-4747-44EA-9D64-D27064C35DCB",
+      "token" : "0x00000",
+      "native_offset" : "0x0",
+      "filename" : "mscorlib.dll",
+      "sizeofimage" : "0x472000",
+      "timestamp" : "0xa45d0dbd",
+      "il_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x10972e949",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x10974da7c",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x109730839",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1096eed1d",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x7fff68b2f109",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x7fff68b2ab8b",
+      "native_offset" : "0x00000"
+   }
+
+  ]
+ },
+ {
+    "is_managed" : false,
+    "offset_free_hash" : "0x0",
+    "offset_rich_hash" : "0x0",
+    "crashed" : false,
+    "native_thread_id" : "0x700006937000",
+    "thread_info_addr" : "0x7fa8d0833a00",
+    "thread_name" : "Debugger agent",
+    "ctx" : {
+      "IP" : "0x7fff68a67e4e",
+      "SP" : "0x700006936ae8",
+      "BP" : "0x700006936b60"
+  },
+    "unmanaged_frames" : [
+  {
+      "is_managed" : "false",
+      "native_address" : "0x109552956",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1096ee0d5",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1096ede07",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1095be920",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x7fff68b235fd",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x109758762",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x10972ed17",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1094b53aa",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1096035ec",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x1096eed1d",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x7fff68b2f109",
+      "native_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "false",
+      "native_address" : "0x7fff68b2ab8b",
+      "native_offset" : "0x00000"
+   }
+
+  ]
+ },
+ {
+    "is_managed" : true,
+    "offset_free_hash" : "0xd2004be04",
+    "offset_rich_hash" : "0xd2004c127",
+    "crashed" : false,
+    "native_thread_id" : "0x110a12dc0",
+    "thread_info_addr" : "0x7fa8d0815200",
+    "thread_name" : "tid_307",
+    "ctx" : {
+      "IP" : "0x7fff68a6a882",
+      "SP" : "0x7ffee675d588",
+      "BP" : "0x7ffee675d620"
+  },
+    "managed_frames" : [
+  {
+      "is_managed" : "false",
+      "native_address" : "unregistered"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x00000",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x0002b"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x6000bcc",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x0000b"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x6001a4f",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "071BC7C5-DA63-40C4-82C2-50F48870ED7A",
+      "token" : "0x6000026",
+      "native_offset" : "0x0",
+      "filename" : "Wafle3D.exe",
+      "sizeofimage" : "0xc000",
+      "timestamp" : "0xb70f40e6",
+      "il_offset" : "0x0017f"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x6000565",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x00010"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x600053e",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x0000c"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x600053c",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x00038"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x6000538",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x00104"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+      "token" : "0x6000537",
+      "native_offset" : "0x0",
+      "filename" : "OpenTK.dll",
+      "sizeofimage" : "0x580000",
+      "timestamp" : "0x980046b5",
+      "il_offset" : "0x00000"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "071BC7C5-DA63-40C4-82C2-50F48870ED7A",
+      "token" : "0x6000039",
+      "native_offset" : "0x0",
+      "filename" : "Wafle3D.exe",
+      "sizeofimage" : "0xc000",
+      "timestamp" : "0xb70f40e6",
+      "il_offset" : "0x00017"
+   }
+,
+  {
+      "is_managed" : "true",
+      "guid" : "071BC7C5-DA63-40C4-82C2-50F48870ED7A",
+      "token" : "0x00000",
+      "native_offset" : "0x0",
+      "filename" : "Wafle3D.exe",
+      "sizeofimage" : "0xc000",
+      "timestamp" : "0xb70f40e6",
+      "il_offset" : "0xffffffff"
+   }
+
+  ],
+  "unmanaged_frames" : [
+ {
+    "is_managed" : "false",
+    "native_address" : "0x109552956",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1096ee0d5",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1096ede07",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1095be920",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x7fff68b235fd",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0xf6a5000070001001",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x109788e80",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x109788c46",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1096ef38f",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1096e87cb",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1096ef2bd",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "(null)",
+    "token" : "0x00000",
+    "native_offset" : "0x0",
+    "filename" : "(null)",
+    "sizeofimage" : "0x0",
+    "timestamp" : "0x0",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x00000",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x6000bcc",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x6001a4f",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "071BC7C5-DA63-40C4-82C2-50F48870ED7A",
+    "token" : "0x6000026",
+    "native_offset" : "0x0",
+    "filename" : "Wafle3D.exe",
+    "sizeofimage" : "0xc000",
+    "timestamp" : "0xb70f40e6",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x6000565",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x600053e",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x600053c",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x6000538",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "6764F93F-9A3E-4037-817C-5D176911BDEA",
+    "token" : "0x6000537",
+    "native_offset" : "0x0",
+    "filename" : "OpenTK.dll",
+    "sizeofimage" : "0x580000",
+    "timestamp" : "0x980046b5",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "071BC7C5-DA63-40C4-82C2-50F48870ED7A",
+    "token" : "0x6000039",
+    "native_offset" : "0x0",
+    "filename" : "Wafle3D.exe",
+    "sizeofimage" : "0xc000",
+    "timestamp" : "0xb70f40e6",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "true",
+    "guid" : "071BC7C5-DA63-40C4-82C2-50F48870ED7A",
+    "token" : "0x00000",
+    "native_offset" : "0x0",
+    "filename" : "Wafle3D.exe",
+    "sizeofimage" : "0xc000",
+    "timestamp" : "0xb70f40e6",
+    "il_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1094b48c2",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1096c3f07",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1096cc3ce",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x109514d7e",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x109517fe5",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x1094a41a8",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x7fff68926cc9",
+    "native_offset" : "0x00000"
+  }
+,
+ {
+    "is_managed" : "false",
+    "native_address" : "0x4",
+    "native_offset" : "0x00000"
+  }
+
+ ]
+}
+]
+}

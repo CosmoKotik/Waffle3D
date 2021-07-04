@@ -68,7 +68,7 @@ namespace Wafle3D.Core
             GL.AttachShader(Handle, VertexShader);
             GL.AttachShader(Handle, FragmentShader);
 
-            Console.WriteLine(GL.GetError());
+            //Console.WriteLine(GL.GetError());
 
             GL.LinkProgram(Handle);
 

@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{98E2A552-CA88-4ABB-B695-46A5141FAF25}|Default">
   <MonoDevelop.Ide.ItemProperties.Wafle3D PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Wafle3D/Core/Texture.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Wafle3D/bin/Debug/Shaders/shader.vert">
     <Files>
-      <File FileName="Wafle3D/Core/Program.cs" Line="1" Column="1" />
-      <File FileName="Wafle3D/Core/WafleEngine.cs" Line="102" Column="88" />
-      <File FileName="Wafle3D/Core/Shader.cs" Line="25" Column="1" />
-      <File FileName="Wafle3D/Core/ObjectManager.cs" Line="27" Column="1" />
-      <File FileName="Wafle3D/Core/Texture.cs" Line="78" Column="1" />
+      <File FileName="Wafle3D/Core/WafleEngine.cs" Line="139" Column="25" />
+      <File FileName="Wafle3D/Core/Shader.cs" />
+      <File FileName="Wafle3D/Core/ObjectManager.cs" />
+      <File FileName="Wafle3D/Core/Texture.cs" />
+      <File FileName="Wafle3D/bin/Debug/Shaders/shader.frag" />
+      <File FileName="Wafle3D/bin/Debug/Shaders/shader.vert" Line="1" Column="12" />
+      <File FileName="Wafle3D/Core/Program.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,7 +16,7 @@
           <Node name="Wafle3D" expanded="True">
             <Node name="Wafle3D" expanded="True">
               <Node name="Core" expanded="True">
-                <Node name="Texture.cs" selected="True" />
+                <Node name="Program.cs" selected="True" />
               </Node>
               <Node name="Debug" expanded="True" />
             </Node>

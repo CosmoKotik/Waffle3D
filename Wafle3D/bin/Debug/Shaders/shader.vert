@@ -1,4 +1,4 @@
-﻿#version 330
+﻿#version 320
 
 attribute vec3 aPos;
 

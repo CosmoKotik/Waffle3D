@@ -37,21 +37,30 @@ namespace Wafle3D.Core
             VertexShader = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(VertexShader, VertexShaderSource);
 
+            Console.WriteLine(GL.GetError());
+
             FragmentShader = GL.CreateShader(ShaderType.FragmentShader);
             GL.ShaderSource(FragmentShader, FragmentShaderSource);
 
+            Console.WriteLine(GL.GetError());
+
             GL.CompileShader(VertexShader);
 
+            Console.WriteLine(GL.GetError());
+
             string infoLogVert = GL.GetShaderInfoLog(VertexShader);
-            if (infoLogVert != System.String.Empty)
-                System.Console.WriteLine(infoLogVert);
+            if (infoLogVert != String.Empty)
+                Console.WriteLine(infoLogVert);
+
+            Console.WriteLine(GL.GetError());
 
             GL.CompileShader(FragmentShader);
 
+            Console.WriteLine(GL.GetError());
+
             string infoLogFrag = GL.GetShaderInfoLog(FragmentShader);
 
-            if (infoLogFrag != System.String.Empty)
-                System.Console.WriteLine(infoLogFrag);
+            Console.WriteLine(GL.GetError());
 
 
             Handle = GL.CreateProgram();
@@ -59,12 +68,18 @@ namespace Wafle3D.Core
             GL.AttachShader(Handle, VertexShader);
             GL.AttachShader(Handle, FragmentShader);
 
+            Console.WriteLine(GL.GetError());
+
             GL.LinkProgram(Handle);
+
+            Console.WriteLine(GL.GetError());
 
             GL.DetachShader(Handle, VertexShader);
             GL.DetachShader(Handle, FragmentShader);
             GL.DeleteShader(FragmentShader);
             GL.DeleteShader(VertexShader);
+
+            Console.WriteLine(GL.GetError());
         }
 
         public void Use()

@@ -1,8 +1,8 @@
-﻿#version 320
+﻿#version 330 core
 
-attribute vec3 aPos;
+layout(location = 0) in vec3 aPos;
 
-attribute vec2 aTexCoord;
+layout(location = 0) in vec2 aTexCoord;
 
 out vec2 texCoord;
 

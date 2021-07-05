@@ -37,7 +37,7 @@ namespace Wafle3D.Core
         private List<string> ScriptNames = new List<string>();
         public List<WafleBehaviour> Scripts = new List<WafleBehaviour>();
 
-        public WafleEngine(int width, int height, string title) : base(width, height, GraphicsMode.Default, title)
+        public WafleEngine(int width, int height, string title) : base(width, height, GraphicsMode.Default, title, GameWindowFlags.Default, DisplayDevice.Default, 4, 6, GraphicsContextFlags.ForwardCompatible)
         {
             Console.WriteLine("Starting");
         }

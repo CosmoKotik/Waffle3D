@@ -76,3 +76,4 @@ D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CoreCompi
 D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CopyComplete
 D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.exe
 D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.pdb
+D:\DEV\Visual Sudio Projects\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csprojAssemblyReference.cache

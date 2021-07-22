@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Wafle3DEditor.Views.HierarchyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:Wafle3DEditor.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel VerticalAlignment="Top">
+            
+            <Button Content="Add TextBox" Command="{Binding TestCommand}"/>
+            <ItemsControl ItemsSource="{Binding Hierarchy}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding BtnText}" Width="100" HorizontalAlignment="Left" Margin="{Binding BtnChildPosition}">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseMove">
+                                    <i:InvokeCommandAction Command="{Binding MouseEnterBtn}" CommandParameter="ViewImportProgress"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseLeave">
+                                    <i:InvokeCommandAction Command="{Binding MouseLeaveBtn}" CommandParameter="ViewImportProgress"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                    <i:InvokeCommandAction Command="{Binding MouseUpBtn}" CommandParameter="ViewImportProgress"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding BtnClick}" CommandParameter="ViewImportProgress"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

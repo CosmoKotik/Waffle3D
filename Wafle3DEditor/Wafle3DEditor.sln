@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wafle3DEditor", "Wafle3DEditor\Wafle3DEditor.csproj", "{45FCE9BF-4B77-44CC-BF75-2A585A1834C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wafle3DEditor", "Wafle3DEditor\Wafle3DEditor.csproj", "{CFF7CAB4-2024-45E4-BCDD-BC8504701D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{45FCE9BF-4B77-44CC-BF75-2A585A1834C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45FCE9BF-4B77-44CC-BF75-2A585A1834C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45FCE9BF-4B77-44CC-BF75-2A585A1834C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45FCE9BF-4B77-44CC-BF75-2A585A1834C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF7CAB4-2024-45E4-BCDD-BC8504701D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF7CAB4-2024-45E4-BCDD-BC8504701D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF7CAB4-2024-45E4-BCDD-BC8504701D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF7CAB4-2024-45E4-BCDD-BC8504701D15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {19793D4C-BBBB-4C22-B13F-B2D6C7EEFCFC}
+		SolutionGuid = {3701825F-2DD2-44D8-ACEC-97AD81C3E765}
 	EndGlobalSection
 EndGlobal

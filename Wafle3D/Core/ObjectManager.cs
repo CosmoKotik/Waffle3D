@@ -50,9 +50,12 @@ namespace Wafle3D.Core
                     vertices.Add(mesh.Vertices[i].Y);
                     vertices.Add(mesh.Vertices[i].Z);
 
-                    texCoords.Add(mesh.TextureCoordinateChannels[0][i].X);
-                    texCoords.Add(mesh.TextureCoordinateChannels[0][i].Y);
-                    texCoords.Add(mesh.TextureCoordinateChannels[0][i].Z);
+                    if (mesh.TextureCoordinateChannelCount != 0)
+                    { 
+                        texCoords.Add(mesh.TextureCoordinateChannels[0][i].X);
+                        texCoords.Add(mesh.TextureCoordinateChannels[0][i].Y);
+                        texCoords.Add(mesh.TextureCoordinateChannels[0][i].Z);
+                    }
                 }
                 
                 for (int i = 0; i < mesh.FaceCount; i++)

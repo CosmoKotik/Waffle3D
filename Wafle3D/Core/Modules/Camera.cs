@@ -16,8 +16,8 @@ namespace Wafle3D.Core.Modules
 
         private Vector3 _right = Vector3.UnitX;
 
-        private Vector3 _position;
-        private Vector3 _rotation;
+        public Vector3 Position;
+        public Vector3 Rotation;
         private Matrix4 _view;
 
         private Vector3 _lastRotation = Vector3.Zero;
@@ -27,9 +27,9 @@ namespace Wafle3D.Core.Modules
 
         public void MoveCamera(Vector3 pos)
         {
-            //_position = Vector3.Normalize(Vector3.Cross(_front, _up)) + pos;
-            _position += _right * pos.X;
-            _position += _front * pos.Z;
+            //Position = Vector3.Normalize(Vector3.Cross(_front, _up)) + pos;
+            Position += _right * pos.X;
+            Position += _front * pos.Z;
         }
         public void RotateCamera(Vector3 rot)
         {
@@ -44,13 +44,15 @@ namespace Wafle3D.Core.Modules
                 _yaw += deltaX;
                 _pitch -= deltaY;
 
+                Rotation = new Vector3(_yaw, _pitch, 0);
+
             }
-                //_rotation = rot;
+                //Rotation = rot;
         }
 
         public Matrix4 GetView()
         {
-            return Matrix4.LookAt(_position, _position + _front, _up);
+            return Matrix4.LookAt(Position, Position + _front, _up);
         }
 
         public void UpdateCamera()

@@ -17,11 +17,12 @@ namespace Wafle3D.Core
 
         public Texture() 
         {
-            Handle = GL.GenTexture();
+            
         }
 
         public void Use(TextureUnit unit = TextureUnit.Texture0)
         {
+            //Handle = GL.GenTexture();
             GL.ActiveTexture(unit);
             GL.BindTexture(TextureTarget.Texture2D, Handle);
         }
@@ -30,6 +31,8 @@ namespace Wafle3D.Core
         {
             try
             {
+                Handle = GL.GenTexture();
+
                 if (path == null)
                     path = @"Textures/gray.png";
 
@@ -53,6 +56,7 @@ namespace Wafle3D.Core
                     }
                     GL.BindTexture(TextureTarget.Texture2D, Handle);
 
+
                     if (!isSetting)
                     {
                         images.Add(image);
@@ -75,9 +79,20 @@ namespace Wafle3D.Core
 
         public void loadTexture(int id)
         {
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, images[id].Width, images[id].Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pix[id]);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+            //Handle = GL.GenTexture();
+            BindTexture(id);
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.LinearMipmapLinear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMinFilter.Linear);
+
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, images[id].Width, images[id].Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pix[id]);
+            GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+        }
+
+        public void BindTexture(int id)
+        {
+            Use();
+            GL.BindTexture(TextureTarget.Texture2D, id);
         }
     }
 }

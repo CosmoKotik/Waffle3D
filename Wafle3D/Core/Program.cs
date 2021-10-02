@@ -11,10 +11,11 @@ namespace Wafle3D.Core
     {
         static void Main(string[] args)
         {
-            using (WafleEngine game = new WafleEngine(800, 600, "Wafle demo"))
+            using (WafleEngine game = new WafleEngine(1920, 1080, "Wafle demo"))
             {
-                game.Run(60.0);
+                double fps = 60;
                 game.VSync = OpenTK.VSyncMode.Off;
+                game.Run(fps, fps);
             }
         }
     }

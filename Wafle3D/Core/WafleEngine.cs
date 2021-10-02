@@ -41,6 +41,12 @@ namespace Wafle3D.Core
         public WafleEngine(int width, int height, string title) : base(width, height, GraphicsMode.Default, title, GameWindowFlags.Default, DisplayDevice.Default, 4, 1, GraphicsContextFlags.ForwardCompatible)
         {
             Console.WriteLine("Starting");
+            
+        }
+
+        public WafleEngine()
+        {
+            Console.WriteLine("Starting");
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -77,7 +83,7 @@ namespace Wafle3D.Core
 
             //Creating a camera perspective view
             projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), Width / (float)Height, 0.01f, 10000.0f);
-            
+
             //Adding scripts
             ScriptNames.Add("Movement");
 
@@ -117,6 +123,17 @@ namespace Wafle3D.Core
             SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
             SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
 
+
+            /*for (int i = 0; i < 1000; i++)
+            {
+                Random rnd = new Random();
+
+                CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), Matrix4.CreateTranslation((float)rnd.NextDouble() * rnd.Next(1, 50), (float)rnd.NextDouble() * rnd.Next(1, 50), (float)rnd.NextDouble() * rnd.Next(1, 50)), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(rnd.Next(0, 360))));
+                //SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
+            }*/
+
+            //GL.BindVertexArray(0);
+
             base.OnLoad(e);
         }
 
@@ -135,7 +152,7 @@ namespace Wafle3D.Core
                 GL.DeleteBuffer(_models[i].vbo);
                 GL.DeleteBuffer(_models[i].ebo);
             }
-
+            
             shader.Dispose();
             base.OnUnload(e);
         }
@@ -145,7 +162,7 @@ namespace Wafle3D.Core
             GL.GenVertexArrays(1, out VertexArrayObject);
             GL.GenBuffers(1, out VertexBufferObject);
             GL.GenBuffers(1, out ElementBufferObject);
-            
+
             mesh.vao = VertexArrayObject;
             mesh.ebo = ElementBufferObject;
             mesh.vbo = VertexBufferObject;
@@ -156,6 +173,9 @@ namespace Wafle3D.Core
 
 
             CreateVertexBuffer(mesh);
+
+            //GL.BindVertexArray(VertexArrayObject);
+            //GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
 
             _models.Add(mesh);
             return mesh.id;
@@ -172,11 +192,14 @@ namespace Wafle3D.Core
             _models[id].rotation = rot;
         }
 
-        public void SetTexture(string path, int id)
+        public void SetTexture(string path, int id = 0)
         {
             //Setting a custom texture of an object from the outside
+            texture.Use();
             _models[id].diffusePath = path;
             texture.AddTexture(path, true, id);
+
+            texture.loadTexture(id);
         }
 
         public void SetPosition(Vector3 position, int id)
@@ -192,7 +215,9 @@ namespace Wafle3D.Core
 
         private void CreateVertexBuffer(ModelMesh mesh) 
         {
-            texture.AddTexture(mesh.diffusePath);
+            int tid = texture.AddTexture(mesh.diffusePath);
+            //texture.Use();
+
 
             float[] vertices = mesh.vertices;
             int[] indices = mesh.indices;
@@ -222,6 +247,8 @@ namespace Wafle3D.Core
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);
 
+            texture.loadTexture(tid);
+
         }
 
         private void RenderObject(Matrix4 position, Matrix4 rotation, Matrix4 scale, int id)
@@ -230,23 +257,30 @@ namespace Wafle3D.Core
             ModelMesh mesh = _models[id];
 
             //Loading texture by id
-            texture.Use();
-            texture.loadTexture(id);
+            //texture.Use();
+            //texture.loadTexture(id);
+
             //texture.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
             //Aplying the texture
             //shader.Use();
 
-            //Binding the vertexes and the buffers, then clearing it
+            //Binding the vertexes and the buffers, then clearing it, UPDATE => NO EBO/VBO on draw
+
             GL.BindVertexArray(mesh.vao);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, mesh.ebo);
+            texture.BindTexture(id);
             GL.DrawElements(All.Triangles, mesh.size, All.UnsignedInt, (IntPtr)0);
-            GL.BindVertexArray(0);
+            //GL.BindVertexArray(0);
+            //GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+
+            
 
             //Trasfering data(position, rotation) to the shader
             shader.SetMatrix4("rotation", rotation);
             shader.SetMatrix4("position", position);
             shader.SetMatrix4("scale", scale);
             shader.SetMatrix4("projection", projection);
+
         }
 
         float kx = 0, ky = 0, mx = 0, my = 0;
@@ -303,7 +337,8 @@ namespace Wafle3D.Core
 
                 RenderObject(pos * cam.GetView(), rot, scale, id);
             }
-            
+
+            //GL.Flush();
             Context.SwapBuffers();
             base.OnRenderFrame(e);
         }
@@ -329,6 +364,26 @@ namespace Wafle3D.Core
             Vector3 rayWorldCoordinates = (new Vector4(-cam.Position.X, cam.Position.Y, 0, 0) * rayEye).Xyz;
             //rayWorldCoordinates.Normalize();
             return rayWorldCoordinates;
+        }
+
+        public void Load()
+        {
+            OnLoad(null);
+        }
+
+        public void UnLoad()
+        {
+            OnUnload(null);
+        }
+
+        public void UpdateFrame()
+        {
+            OnUpdateFrame(null);
+        }
+
+        public void RenderFrame()
+        {
+            OnRenderFrame(null);
         }
 
         protected override void OnResize(EventArgs e)

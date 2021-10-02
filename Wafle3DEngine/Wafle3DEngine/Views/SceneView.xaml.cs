@@ -25,6 +25,8 @@ namespace Wafle3DEditor.Views
     /// </summary>
     public partial class SceneView : UserControl
     {
+        //private WafleEngine engine;
+
         public SceneView()
         {
             InitializeComponent();
@@ -34,15 +36,17 @@ namespace Wafle3DEditor.Views
                 MajorVersion = 3,
                 MinorVersion = 6
             };
+
+            //engine = new WafleEngine();
+
+            //engine.Load();
+
             Scene.Start(settings);
         }
 
         private void Scene_Render(TimeSpan obj)
         {
-            GL.ClearColor(Color4.Blue);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            GL.Flush();
+            //engine.RenderFrame();
         }
     }
 }

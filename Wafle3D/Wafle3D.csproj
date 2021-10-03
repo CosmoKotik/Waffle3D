@@ -78,6 +78,7 @@
     <Compile Include="Core\Modules\Camera.cs" />
     <Compile Include="Core\Modules\GameObject.cs" />
     <Compile Include="Core\Modules\Input.cs" />
+    <Compile Include="Core\Modules\Lighting\Light.cs" />
     <Compile Include="Core\Modules\Raycast.cs" />
     <Compile Include="Core\Modules\Transform.cs" />
     <Compile Include="Scripts\Movement.cs" />

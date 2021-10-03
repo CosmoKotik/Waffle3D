@@ -93,6 +93,13 @@ namespace Wafle3D.Core
 
             GL.Uniform1(location, value);
         }
+        
+        public void SetFloat(string name, float value)
+        {
+            int location = GL.GetUniformLocation(Handle, name);
+
+            GL.Uniform1(location, value);
+        }
 
         public void SetMatrix4(string name, Matrix4 matrix)
         {
@@ -101,6 +108,15 @@ namespace Wafle3D.Core
             int location = GL.GetUniformLocation(Handle, name);
 
             GL.UniformMatrix4(location, true, ref matrix);
+        }
+
+        public void SetVector3(string name, Vector3 vector)
+        {
+            GL.UseProgram(Handle);
+
+            int location = GL.GetUniformLocation(Handle, name);
+
+            GL.Uniform3(location, ref vector);
         }
 
         protected virtual void Dispose(bool disposing)

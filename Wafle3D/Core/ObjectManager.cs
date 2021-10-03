@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assimp;
+using OpenTK;
 
 namespace Wafle3D.Core
 {
@@ -31,6 +32,7 @@ namespace Wafle3D.Core
 
             List<GameObject> gameObjects = new List<GameObject>();
             List<float> vertices = new List<float>();
+            List<Vector3> normals = new List<Vector3>();
             List<int> indices = new List<int>();
             List<float> texCoords = new List<float>();
 
@@ -57,18 +59,25 @@ namespace Wafle3D.Core
                         texCoords.Add(mesh.TextureCoordinateChannels[0][i].Z);
                     }
                 }
-                
+
                 for (int i = 0; i < mesh.FaceCount; i++)
                 {
                     indices.Add(mesh.Faces[i].Indices[0]);
                     indices.Add(mesh.Faces[i].Indices[1]);
                     indices.Add(mesh.Faces[i].Indices[2]);
                 }
+
+                //Adding normals
+                for (int i = 0; i < mesh.Normals.Count; i++)
+                {
+                    normals.Add(new Vector3(mesh.Normals[i].X, mesh.Normals[i].Y, mesh.Normals[i].Z));
+                }
             }
 
             modelMesh.vertices = vertices.ToArray();
             modelMesh.indices = indices.ToArray();
             modelMesh.texCoords = texCoords.ToArray();
+            modelMesh.Normals = normals[0];
 
             modelMesh.size = indices.Count;
 

@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Wafle3D;
 using Wafle3D.Core.Modules;
 using System.Reflection;
+using static Wafle3D.Core.Modules.Lighting.Light;
 
 namespace Wafle3D.Core
 {
@@ -30,9 +31,11 @@ namespace Wafle3D.Core
         private Camera cam;
 
         private List<ModelMesh> _models = new List<ModelMesh>();
+        private int _lightCount = 0;
 
         Texture texture;
         Shader shader;
+        Shader lightShader;
         Matrix4 projection;
 
         private List<string> ScriptNames = new List<string>();
@@ -78,6 +81,7 @@ namespace Wafle3D.Core
             //Initializing object manager, texture and shaders
             ObjectManager = new ObjectManager();
             shader = new Shader(@"Shaders/shader.vert", @"Shaders/shader.frag");
+            lightShader = new Shader(@"Shaders/light.vert", @"Shaders/light.frag");
             texture = new Texture();
             cam = new Camera();
 
@@ -107,18 +111,25 @@ namespace Wafle3D.Core
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Lequal);
 
+            //Enabling lightning
+            //GL.Enable(EnableCap.Lighting);
+
             //Adding objects and displaying the id
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), Matrix4.CreateTranslation(0.0f, -3.0f, -4.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)));
             CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), Matrix4.CreateTranslation(100.0f, 0.0f, -533.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)));
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), Matrix4.CreateTranslation(-10.0f, 0.0f, -10.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90)));
+            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), Matrix4.CreateTranslation(-10.0f, 0.0f, 10.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90)));
             CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), Matrix4.CreateTranslation(150.0f, 0.0f, -422.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180)));
             CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), Matrix4.CreateTranslation(0.0f, 0.0f, -0.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180)));
             CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), Matrix4.CreateTranslation(10.0f, 0.0f, -0.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180)));
 
+            //Light point
+            CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
+            CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
+
             
 
             //Setting custom textures to the objects
-            SetTexture(@"Models/gray.png", 0);
+            //SetTexture(@"Models/gray.png", 0);
             SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
             SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
             SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
@@ -154,25 +165,36 @@ namespace Wafle3D.Core
             }
             
             shader.Dispose();
+            lightShader.Dispose();
             base.OnUnload(e);
         }
 
-        public int CreateObject(ModelMesh mesh, Matrix4 position, Matrix4 rotation)
+        public int CreateObject(ModelMesh mesh, Matrix4 position, Matrix4 rotation, LightType light = LightType.nul)
         {
             GL.GenVertexArrays(1, out VertexArrayObject);
             GL.GenBuffers(1, out VertexBufferObject);
             GL.GenBuffers(1, out ElementBufferObject);
 
-            mesh.vao = VertexArrayObject;
-            mesh.ebo = ElementBufferObject;
-            mesh.vbo = VertexBufferObject;
 
             mesh.position = position;
             mesh.rotation = rotation;
             mesh.scale = Matrix4.CreateScale(1f, 1f, 1f);
+            mesh.id = _models.Count;
 
+            if (light != LightType.nul)
+            {
+                mesh.isLight = true;
+                mesh.lightId = _lightCount;
+                mesh.lightType = light;
+                _lightCount++;
+            }
+
+            mesh.vao = VertexArrayObject;
+            mesh.ebo = ElementBufferObject;
+            mesh.vbo = VertexBufferObject;
 
             CreateVertexBuffer(mesh);
+
 
             //GL.BindVertexArray(VertexArrayObject);
             //GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
@@ -215,13 +237,38 @@ namespace Wafle3D.Core
 
         private void CreateVertexBuffer(ModelMesh mesh) 
         {
-            int tid = texture.AddTexture(mesh.diffusePath);
-            //texture.Use();
-
+            lightShader.Use();
 
             float[] vertices = mesh.vertices;
             int[] indices = mesh.indices;
             float[] texCoords = mesh.texCoords;
+
+            int vertexLocation = 0;
+            int texCoordsLocation = 2;
+
+            if (mesh.isLight)
+            {
+                //Initialize the vao for the lamp, this is mostly the same as the code for the model cube
+                VertexArrayObject = GL.GenVertexArray();
+                GL.BindVertexArray(VertexArrayObject);
+                //We only need to bind to the VBO, the container's VBO's data already contains the correct data.
+                GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
+                //Set the vertex attributes (only position data for our lamp)
+                int normalLocation = 1;
+                GL.EnableVertexAttribArray(vertexLocation);
+                GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+                GL.EnableVertexAttribArray(normalLocation);
+                GL.VertexAttribPointer(normalLocation, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 3 * sizeof(float));
+
+                GL.BindVertexArray(0);
+
+                return;
+            }
+
+            texture.Use();
+            int tid = texture.AddTexture(mesh.diffusePath);
+
+            //onsole.WriteLine(vertexLocation);
 
             GL.BindVertexArray(0);
             GL.BindVertexArray(VertexArrayObject);
@@ -232,54 +279,114 @@ namespace Wafle3D.Core
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(int), indices, BufferUsageHint.StaticDraw);
 
-            GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+            GL.EnableVertexAttribArray(vertexLocation);
+            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
 
             GL.GenBuffers(1, out uvBuffer);
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, uvBuffer);
             GL.BufferData(BufferTarget.ArrayBuffer, texCoords.Length * sizeof(float), texCoords, BufferUsageHint.StaticDraw);
 
-            GL.EnableVertexAttribArray(1);
-            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+            GL.EnableVertexAttribArray(texCoordsLocation);
+            GL.VertexAttribPointer(texCoordsLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
 
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            //GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+            //GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);
-
+            Console.WriteLine(texCoordsLocation);
             texture.loadTexture(tid);
 
         }
 
         private void RenderObject(Matrix4 position, Matrix4 rotation, Matrix4 scale, int id)
         {
-            //Creating a mesh
+            //Getting mesh
             ModelMesh mesh = _models[id];
+            
+            //Set Light prop
+            lightShader.Use();
+            lightShader.SetVector3("objectColor", new Vector3(1.0f, 1.5f, 1.31f));
+            lightShader.SetVector3("lightColor", new Vector3(1.0f, 1.0f, 1.0f));
+            lightShader.SetVector3("viewPos", cam.Position);
 
-            //Loading texture by id
-            //texture.Use();
-            //texture.loadTexture(id);
+            //Set position/rotation/camera
+            lightShader.SetMatrix4("rotation", rotation); //model
+            lightShader.SetMatrix4("position", position); //view
+            lightShader.SetMatrix4("scale", scale); //scale
+            lightShader.SetMatrix4("projection", projection); //camera projection
 
-            //texture.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
-            //Aplying the texture
-            //shader.Use();
+            //Set material
+            //lightShader.SetVector3("material.ambient", new Vector3(1.0f, 0.5f, 0.31f));
+
+            //texture.BindTexture(id);
+            texture.Use();
+            texture.BindTexture(id);
+
+            lightShader.SetInt("material.diffuse", 0);
+            lightShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
+            lightShader.SetFloat("material.shininess", 256);
+
+            //Set light prop
+            //lightShader.SetVector3("light.position", cam.Position);
+
+            Vector3 lightColor;
+            float time = DateTime.Now.Second + DateTime.Now.Millisecond / 1000f;
+            lightColor.X = (float)Math.Sin(time * 2.0f);
+            lightColor.Y = (float)Math.Sin(time * 0.7f);
+            lightColor.Z = (float)Math.Sin(time * 1.3f);
+
+            float lightYaxis = (float)Math.Sin(time * 2.0f);
+
+            Vector3 ambientColor = lightColor * new Vector3(2f);
+            Vector3 diffuseColor = lightColor * new Vector3(5f);
+            //Console.WriteLine(mesh.isLight + "  " + id);
+            if (mesh.isLight)
+            {
+                //Console.WriteLine(mesh.position.ExtractTranslation());
+                //lightShader.SetVector3("light.position", mesh.position.ExtractTranslation() * new Vector3(1, lightYaxis, 1));
+                
+                switch (mesh.lightType)
+                {
+                    case LightType.Directional:
+                        lightShader.SetVector3("dirLight.direction", mesh.rotation.ExtractRotation().Xyz); // Light direction/rotation
+
+                        lightShader.SetVector3("dirLight.ambient", mesh.color * mesh.intensity); // Light intensity and color
+                        lightShader.SetVector3("dirLight.diffuse", new Vector3(0.5f, 0.5f, 0.5f));
+                        lightShader.SetVector3("dirLight.specular", new Vector3(0.5f, 0.5f, 0.5f));
+                        break;
+                    case LightType.Point:
+                        lightShader.SetVector3($"pointLights[" + mesh.lightId + "].position", mesh.position.ExtractTranslation() * new Vector3(1, lightYaxis, 1));
+
+                        lightShader.SetInt("PointLightSize", _lightCount);
+
+                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].ambient", mesh.color * mesh.intensity); // Light intensity and color
+                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].diffuse", new Vector3(0.5f, 0.5f, 0.5f));
+
+                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].specular", new Vector3(0.5f, 0.5f, 0.5f));
+
+                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].constant", 1.0f);
+                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].linear", 0.7f);
+                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].quadratic", 1.8f);
+                        break;
+                    case LightType.Spot:
+                        break;
+                }
+            }
+            /*lightShader.SetVector3("light.ambient", Vector3.One * 2);
+            lightShader.SetVector3("light.diffuse", new Vector3(0.5f, 0.5f, 0.5f)); // darken the light a bit to fit the scene
+
+            lightShader.SetVector3("light.specular", Vector3.Zero);
+            lightShader.SetFloat("light.constant", 1.0f);
+            lightShader.SetFloat("light.linear", 0.7f);
+            lightShader.SetFloat("light.quadratic", 1.8f);*/
 
             //Binding the vertexes and the buffers, then clearing it, UPDATE => NO EBO/VBO on draw
-
             GL.BindVertexArray(mesh.vao);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, mesh.ebo);
-            texture.BindTexture(id);
-            GL.DrawElements(All.Triangles, mesh.size, All.UnsignedInt, (IntPtr)0);
-            //GL.BindVertexArray(0);
-            //GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
-
             
 
-            //Trasfering data(position, rotation) to the shader
-            shader.SetMatrix4("rotation", rotation);
-            shader.SetMatrix4("position", position);
-            shader.SetMatrix4("scale", scale);
-            shader.SetMatrix4("projection", projection);
+            GL.DrawElements(All.Triangles, mesh.size, All.UnsignedInt, (IntPtr)0);
+            //GL.BindVertexArray(0);
 
         }
 
@@ -287,7 +394,8 @@ namespace Wafle3D.Core
         
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            //GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            GL.ClearColor(0, 0, 0, 1);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             /*float x = (2.0f * Input.GetAxis("Mouse X")) / Width - 1f;
@@ -324,14 +432,14 @@ namespace Wafle3D.Core
             int m_id = 0;
             for (int i = 0; i < _models.Count; i++)
             {
-                m_id = i + 1;
+                m_id = i;
 
                 if (m_id == _models.Count)
                     m_id = 0;
 
-                Matrix4 pos = _models[m_id].position;
-                Matrix4 rot = _models[m_id].rotation;
-                Matrix4 scale = _models[m_id].scale;
+                Matrix4 pos = _models[i].position;
+                Matrix4 rot = _models[i].rotation;
+                Matrix4 scale = _models[i].scale;
 
                 int id = _models[i].id;
 

@@ -24,7 +24,7 @@ namespace Wafle3D.Core
         {
             //Handle = GL.GenTexture();
             GL.ActiveTexture(unit);
-            GL.BindTexture(TextureTarget.Texture2D, Handle);
+            //GL.BindTexture(TextureTarget.Texture2D, Handle);
         }
 
         public int AddTexture(string path, bool isSetting = false, int id = 0)

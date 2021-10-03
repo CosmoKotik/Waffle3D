@@ -2,6 +2,8 @@
 
 out vec4 FragColor;
 
+out vec4 fragment;
+
 in vec2 texCoord;
 
 uniform sampler2D texture1;

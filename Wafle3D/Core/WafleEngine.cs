@@ -32,6 +32,7 @@ namespace Wafle3D.Core
 
         private List<ModelMesh> _models = new List<ModelMesh>();
         private int _lightCount = 0;
+        private int _lightPointCount = 0;
 
         Texture texture;
         Shader shader;
@@ -186,6 +187,14 @@ namespace Wafle3D.Core
                 mesh.isLight = true;
                 mesh.lightId = _lightCount;
                 mesh.lightType = light;
+
+                switch (light)
+                {
+                    case LightType.Point:
+                        _lightPointCount++;
+                        break;
+                }
+
                 _lightCount++;
             }
 
@@ -357,7 +366,7 @@ namespace Wafle3D.Core
                     case LightType.Point:
                         lightShader.SetVector3($"pointLights[" + mesh.lightId + "].position", mesh.position.ExtractTranslation() * new Vector3(1, lightYaxis, 1));
 
-                        lightShader.SetInt("PointLightSize", _lightCount);
+                        lightShader.SetInt("PointLightSize", _lightPointCount);
 
                         lightShader.SetVector3("pointLights[" + mesh.lightId + "].ambient", mesh.color * mesh.intensity); // Light intensity and color
                         lightShader.SetVector3("pointLights[" + mesh.lightId + "].diffuse", new Vector3(0.5f, 0.5f, 0.5f));

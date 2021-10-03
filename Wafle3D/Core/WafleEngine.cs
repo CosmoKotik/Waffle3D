@@ -17,6 +17,7 @@ using Wafle3D;
 using Wafle3D.Core.Modules;
 using System.Reflection;
 using static Wafle3D.Core.Modules.Lighting.Light;
+using Wafle3D.Core.Modules.Lighting;
 
 namespace Wafle3D.Core
 {
@@ -124,8 +125,9 @@ namespace Wafle3D.Core
             CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), Matrix4.CreateTranslation(10.0f, 0.0f, -0.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180)));
 
             //Light point
-            CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
-            CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
+            //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
+            //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
+            CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point, Light.Advanced(Vector3.One, 2, 256));
 
             
 
@@ -170,7 +172,7 @@ namespace Wafle3D.Core
             base.OnUnload(e);
         }
 
-        public int CreateObject(ModelMesh mesh, Matrix4 position, Matrix4 rotation, LightType light = LightType.nul)
+        public int CreateObject(ModelMesh mesh, Matrix4 position, Matrix4 rotation, LightType light = LightType.nul, Light lightOptions = null)
         {
             GL.GenVertexArrays(1, out VertexArrayObject);
             GL.GenBuffers(1, out VertexBufferObject);
@@ -187,6 +189,13 @@ namespace Wafle3D.Core
                 mesh.isLight = true;
                 mesh.lightId = _lightCount;
                 mesh.lightType = light;
+
+                if (lightOptions != null)
+                {
+                    mesh.intensity = lightOptions.Intensity;
+                    mesh.shininess = lightOptions.Snininess;
+                    mesh.color = lightOptions.Color;
+                }
 
                 switch (light)
                 {
@@ -333,7 +342,7 @@ namespace Wafle3D.Core
 
             lightShader.SetInt("material.diffuse", 0);
             lightShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
-            lightShader.SetFloat("material.shininess", 256);
+            lightShader.SetFloat("material.shininess", mesh.shininess);
 
             //Set light prop
             //lightShader.SetVector3("light.position", cam.Position);
@@ -378,6 +387,14 @@ namespace Wafle3D.Core
                         lightShader.SetFloat("pointLights[" + mesh.lightId + "].quadratic", 1.8f);
                         break;
                     case LightType.Spot:
+                        lightShader.SetVector3("spotLight.direction", Vector3.Zero); // Light direction/rotation
+
+                        lightShader.SetVector3("spotLight.position", mesh.position.ExtractTranslation());
+                        lightShader.SetFloat("light.cutOff", (float)Math.Cos(MathHelper.DegreesToRadians(12.5)));
+
+                        lightShader.SetVector3("dirLight.ambient", mesh.color * mesh.intensity); // Light intensity and color
+                        lightShader.SetVector3("dirLight.diffuse", new Vector3(0.5f, 0.5f, 0.5f));
+                        lightShader.SetVector3("dirLight.specular", new Vector3(0.5f, 0.5f, 0.5f));
                         break;
                 }
             }

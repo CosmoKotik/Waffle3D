@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Wafle3D.Core;
+using Wafle3D.Core.Modules.Lighting;
+using static Wafle3D.Core.Modules.Lighting.Light;
 
 namespace Wafle3D
 {
@@ -19,15 +21,9 @@ namespace Wafle3D
         public virtual void OnLoad() { }
         public virtual void OnUpdate() { }
 
-        public void CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation)
+        public void CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation, Vector3 scale, LightType type = LightType.nul, Light lightOptions = null)
         {
-            Matrix4 RX = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(rotation.X));
-            Matrix4 RY = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(rotation.Y));
-            Matrix4 RZ = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(rotation.Z));
-
-            Matrix4 rot = RX * RY * RZ;
-            
-            gameEngine.CreateObject(mesh, Matrix4.CreateTranslation(position), rot);
+            gameEngine.CreateObject(mesh, position, rotation, scale, type, lightOptions);
         }
 
         public WafleBehaviour GetBehaviour()

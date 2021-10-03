@@ -27,6 +27,7 @@ namespace Wafle3D.Core
         public int lightId;
         public int shininess = 2; // more shininess = more lag = pc strugling
         public float intensity = 1.0f;
+        public float pointSize = 1.0f;
         public Vector3 color = Vector3.One;
         public LightType lightType = LightType.nul;
 

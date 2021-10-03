@@ -117,17 +117,17 @@ namespace Wafle3D.Core
             //GL.Enable(EnableCap.Lighting);
 
             //Adding objects and displaying the id
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), Matrix4.CreateTranslation(0.0f, -3.0f, -4.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)));
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), Matrix4.CreateTranslation(100.0f, 0.0f, -533.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)));
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), Matrix4.CreateTranslation(-10.0f, 0.0f, 10.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90)));
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), Matrix4.CreateTranslation(150.0f, 0.0f, -422.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180)));
-            CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), Matrix4.CreateTranslation(0.0f, 0.0f, -0.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180)));
-            CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), Matrix4.CreateTranslation(10.0f, 0.0f, -0.0f), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(180)));
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), new Vector3(0.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), new Vector3(10.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
 
             //Light point
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
-            CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point, Light.Advanced(Vector3.One, 2, 256));
+            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Point, Light.Advanced(Vector3.One, 1, 1, 2));
 
             
 
@@ -172,32 +172,37 @@ namespace Wafle3D.Core
             base.OnUnload(e);
         }
 
-        public int CreateObject(ModelMesh mesh, Matrix4 position, Matrix4 rotation, LightType light = LightType.nul, Light lightOptions = null)
+        public int CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation, Vector3 Scale, LightType type = LightType.nul, Light lightOptions = null)
         {
             GL.GenVertexArrays(1, out VertexArrayObject);
             GL.GenBuffers(1, out VertexBufferObject);
             GL.GenBuffers(1, out ElementBufferObject);
 
+            Matrix4 RX = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(rotation.X));
+            Matrix4 RY = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(rotation.Y));
+            Matrix4 RZ = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(rotation.Z));
+            Matrix4 rot = RX * RY * RZ;
 
-            mesh.position = position;
-            mesh.rotation = rotation;
-            mesh.scale = Matrix4.CreateScale(1f, 1f, 1f);
+            mesh.rotation = rot;
+            mesh.position = Matrix4.CreateTranslation(position);
+            mesh.scale = Matrix4.CreateScale(Scale);
             mesh.id = _models.Count;
 
-            if (light != LightType.nul)
+            if (type != LightType.nul)
             {
                 mesh.isLight = true;
                 mesh.lightId = _lightCount;
-                mesh.lightType = light;
+                mesh.lightType = type;
 
                 if (lightOptions != null)
                 {
                     mesh.intensity = lightOptions.Intensity;
                     mesh.shininess = lightOptions.Snininess;
                     mesh.color = lightOptions.Color;
+                    mesh.pointSize = lightOptions.Size;
                 }
 
-                switch (light)
+                switch (type)
                 {
                     case LightType.Point:
                         _lightPointCount++;
@@ -374,6 +379,7 @@ namespace Wafle3D.Core
                         break;
                     case LightType.Point:
                         lightShader.SetVector3($"pointLights[" + mesh.lightId + "].position", mesh.position.ExtractTranslation() * new Vector3(1, lightYaxis, 1));
+                        //lightShader.SetFloat("sizePoint[" + mesh.lightId + "].size", 100);
 
                         lightShader.SetInt("PointLightSize", _lightPointCount);
 
@@ -385,6 +391,7 @@ namespace Wafle3D.Core
                         lightShader.SetFloat("pointLights[" + mesh.lightId + "].constant", 1.0f);
                         lightShader.SetFloat("pointLights[" + mesh.lightId + "].linear", 0.7f);
                         lightShader.SetFloat("pointLights[" + mesh.lightId + "].quadratic", 1.8f);
+
                         break;
                     case LightType.Spot:
                         lightShader.SetVector3("spotLight.direction", Vector3.Zero); // Light direction/rotation

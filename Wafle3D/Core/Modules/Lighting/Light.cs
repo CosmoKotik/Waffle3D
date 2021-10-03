@@ -13,14 +13,16 @@ namespace Wafle3D.Core.Modules.Lighting
 
         public int Snininess = 2;
         public float Intensity = 1.0f;
+        public float Size = 1.0f;
         public Vector3 Color = Vector3.One;
 
-        public static Light Advanced(Vector3 color, float intens = 1f, int shininess = 2)
+        public static Light Advanced(Vector3 color, float size = 1f, float intens = 1f, int shininess = 2)
         {
             Light l = new Light();
 
             l.Color = color;
             l.Intensity = intens;
+            l.Size = size;
             l.Snininess = shininess;
 
             return l;

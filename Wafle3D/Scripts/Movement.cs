@@ -14,7 +14,7 @@ public class Movement : WafleBehaviour
         Console.WriteLine("OnStart");
     }
 
-    public int x = 0;
+    public float x = 0;
 
     public override void OnUpdate()
     {
@@ -23,8 +23,9 @@ public class Movement : WafleBehaviour
 
         //Console.WriteLine("OnUpdate");
 
-        gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 1);
-        x++;
+        //gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 1);
+        //gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 6);
+        x += 0.1f;
 
 
         //GameObject.FindChild().a();

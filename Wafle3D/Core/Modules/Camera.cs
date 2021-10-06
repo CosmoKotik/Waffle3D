@@ -23,16 +23,33 @@ namespace Wafle3D.Core.Modules
         private Vector3 _lastRotation = Vector3.Zero;
         private float _yaw = -MathHelper.PiOver2;
         private float _pitch;
+        private bool _is2D;
 
+        public Camera(bool is2D = false)
+        {
+            this._is2D = is2D;
+        }
 
         public void MoveCamera(Vector3 pos)
         {
             //Position = Vector3.Normalize(Vector3.Cross(_front, _up)) + pos;
             Position += _right * pos.X;
-            Position += _front * pos.Z;
+            Position += _up * pos.Y;
+            if (!_is2D)
+                Position += _front * pos.Z;
         }
+        public void MoveCamera(Vector2 pos)
+        {
+            //Position = Vector3.Normalize(Vector3.Cross(_front, _up)) + pos;
+            Position += _right * pos.X;
+            Position += _up * pos.Y;
+        }
+
         public void RotateCamera(Vector3 rot)
         {
+            if (_is2D)
+                rot = Vector3.Zero;
+
             if (_lastRotation == Vector3.Zero)
                 _lastRotation = new Vector3(rot.X, rot.Y, rot.Z);
             else

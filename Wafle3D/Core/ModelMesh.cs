@@ -35,8 +35,8 @@ namespace Wafle3D.Core
         public int ebo;
         public int vbo;
 
-        public Matrix4 position;
-        public Matrix4 rotation;
+        public Matrix4 position = Matrix4.Zero;
+        public Matrix4 rotation = Matrix4.Zero;
         public Matrix4 scale;
 
         public List<GameObject> gameObjects;

@@ -11,12 +11,29 @@ namespace Wafle3D.Core
 {
     public class ObjectManager
     {
-        public enum ObjectType { Cube = 0, Sphere = 1, Custom = 2 }
+        public enum ObjectType { Cube = 0, Sphere = 1, Plane = 2, Custom = 99 }
 
         private List<ModelMesh> _models = new List<ModelMesh>();
 
-        public ModelMesh LoadModel(string path)
+        public ModelMesh LoadModel(string path, ObjectType otype = ObjectType.Custom)
         {
+            switch (otype)
+            {
+                case ObjectType.Plane:
+                    ModelMesh m = new ModelMesh();
+                    
+                    float[] vert = {
+                        -0.5f, -0.5f, 0.0f, //Bottom-left vertex
+                         0.5f, -0.5f, 0.0f, //Bottom-right vertex
+                         0.0f,  0.5f, 0.0f  //Top vertex
+                    };
+
+                    m.vertices = vert;
+
+                    return m;
+                    break;
+            }
+
             AssimpContext context = new AssimpContext();
             const PostProcessSteps flags = PostProcessSteps.GenerateSmoothNormals | PostProcessSteps.SortByPrimitiveType |
                                            PostProcessSteps.CalculateTangentSpace | PostProcessSteps.GenerateNormals |

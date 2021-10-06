@@ -34,18 +34,21 @@ namespace Wafle3D.Core
         private List<ModelMesh> _models = new List<ModelMesh>();
         private int _lightCount = 0;
         private int _lightPointCount = 0;
+        private bool _is2D = false;
 
         Texture texture;
         Shader shader;
         Shader lightShader;
         Matrix4 projection;
 
+
         private List<string> ScriptNames = new List<string>();
         public List<WafleBehaviour> Scripts = new List<WafleBehaviour>();
 
-        public WafleEngine(int width, int height, string title) : base(width, height, GraphicsMode.Default, title, GameWindowFlags.Default, DisplayDevice.Default, 4, 1, GraphicsContextFlags.ForwardCompatible)
+        public WafleEngine(int width, int height, string title, bool is2D) : base(width, height, GraphicsMode.Default, title, GameWindowFlags.Default, DisplayDevice.Default, 4, 1, GraphicsContextFlags.ForwardCompatible)
         {
             Console.WriteLine("Starting");
+            this._is2D = is2D;
             
         }
 
@@ -85,7 +88,7 @@ namespace Wafle3D.Core
             shader = new Shader(@"Shaders/shader.vert", @"Shaders/shader.frag");
             lightShader = new Shader(@"Shaders/light.vert", @"Shaders/light.frag");
             texture = new Texture();
-            cam = new Camera();
+            cam = new Camera(_is2D);
 
             //Creating a camera perspective view
             projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), Width / (float)Height, 0.01f, 10000.0f);
@@ -127,7 +130,8 @@ namespace Wafle3D.Core
             //Light point
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
-            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Point, Light.Advanced(Vector3.One, 1, 1, 2));
+            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Point, Light.Advanced(Vector3.One, 1, 10, 2));
+            //CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Point, Light.Advanced(Vector3.One, 1, 1, 2));
 
             
 
@@ -137,6 +141,9 @@ namespace Wafle3D.Core
             SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
             SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
 
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel("", ObjectManager.ObjectType.Plane), Vector3.Zero, Vector3.Zero, Vector3.One);
+            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Directional, Light.Advanced(Vector3.One, 1, 1, 2));
 
             /*for (int i = 0; i < 1000; i++)
             {
@@ -378,7 +385,7 @@ namespace Wafle3D.Core
                         lightShader.SetVector3("dirLight.specular", new Vector3(0.5f, 0.5f, 0.5f));
                         break;
                     case LightType.Point:
-                        lightShader.SetVector3($"pointLights[" + mesh.lightId + "].position", mesh.position.ExtractTranslation() * new Vector3(1, lightYaxis, 1));
+                        lightShader.SetVector3($"pointLights[" + mesh.lightId + "].position", mesh.position.ExtractTranslation());
                         //lightShader.SetFloat("sizePoint[" + mesh.lightId + "].size", 100);
 
                         lightShader.SetInt("PointLightSize", _lightPointCount);
@@ -419,7 +426,8 @@ namespace Wafle3D.Core
             
 
             GL.DrawElements(All.Triangles, mesh.size, All.UnsignedInt, (IntPtr)0);
-            //GL.BindVertexArray(0);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
+            GL.BindVertexArray(0);
 
         }
 
@@ -459,6 +467,7 @@ namespace Wafle3D.Core
 
                 cam.MoveCamera(new Vector3(kx, 0, ky));
                 cam.RotateCamera(new Vector3(mx, 0, my));
+                Console.WriteLine(cam.Position);
             }
             cam.UpdateCamera();
 

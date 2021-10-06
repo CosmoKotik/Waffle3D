@@ -23,6 +23,14 @@ namespace Wafle3D.Core
 {
     public class WafleEngine : GameWindow
     {
+        /*
+         * Code written by: CosmoKotik
+         * The code isn't best one, but at least something;
+         * It is optimized and working fine;
+         * 
+         * Copyright own CosmoKotik, DO NOT COPY
+        */
+
         int VertexBufferObject;
         int VertexArrayObject;
         int ElementBufferObject;
@@ -117,7 +125,7 @@ namespace Wafle3D.Core
             GL.DepthFunc(DepthFunction.Lequal);
 
             //Enabling lightning
-            //GL.Enable(EnableCap.Lighting);
+            GL.Enable(EnableCap.Lighting);
 
             //Adding objects and displaying the id
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
@@ -131,12 +139,10 @@ namespace Wafle3D.Core
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
             CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Point, Light.Advanced(Vector3.One, 1, 10, 2));
-            //CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Point, Light.Advanced(Vector3.One, 1, 1, 2));
 
             
 
             //Setting custom textures to the objects
-            //SetTexture(@"Models/gray.png", 0);
             SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
             SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
             SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
@@ -144,16 +150,6 @@ namespace Wafle3D.Core
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
             CreateObject(ObjectManager.LoadModel("", ObjectManager.ObjectType.Plane), Vector3.Zero, Vector3.Zero, Vector3.One);
             CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Directional, Light.Advanced(Vector3.One, 1, 1, 2));
-
-            /*for (int i = 0; i < 1000; i++)
-            {
-                Random rnd = new Random();
-
-                CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), Matrix4.CreateTranslation((float)rnd.NextDouble() * rnd.Next(1, 50), (float)rnd.NextDouble() * rnd.Next(1, 50), (float)rnd.NextDouble() * rnd.Next(1, 50)), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(rnd.Next(0, 360))));
-                //SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
-            }*/
-
-            //GL.BindVertexArray(0);
 
             base.OnLoad(e);
         }
@@ -224,10 +220,6 @@ namespace Wafle3D.Core
             mesh.vbo = VertexBufferObject;
 
             CreateVertexBuffer(mesh);
-
-
-            //GL.BindVertexArray(VertexArrayObject);
-            //GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
 
             _models.Add(mesh);
             return mesh.id;
@@ -332,7 +324,11 @@ namespace Wafle3D.Core
         {
             //Getting mesh
             ModelMesh mesh = _models[id];
-            
+
+            //Binding texture
+            texture.Use();
+            texture.BindTexture(id);
+
             //Set Light prop
             lightShader.Use();
             lightShader.SetVector3("objectColor", new Vector3(1.0f, 1.5f, 1.31f));
@@ -346,35 +342,13 @@ namespace Wafle3D.Core
             lightShader.SetMatrix4("projection", projection); //camera projection
 
             //Set material
-            //lightShader.SetVector3("material.ambient", new Vector3(1.0f, 0.5f, 0.31f));
-
-            //texture.BindTexture(id);
-            texture.Use();
-            texture.BindTexture(id);
-
             lightShader.SetInt("material.diffuse", 0);
             lightShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
             lightShader.SetFloat("material.shininess", mesh.shininess);
 
             //Set light prop
-            //lightShader.SetVector3("light.position", cam.Position);
-
-            Vector3 lightColor;
-            float time = DateTime.Now.Second + DateTime.Now.Millisecond / 1000f;
-            lightColor.X = (float)Math.Sin(time * 2.0f);
-            lightColor.Y = (float)Math.Sin(time * 0.7f);
-            lightColor.Z = (float)Math.Sin(time * 1.3f);
-
-            float lightYaxis = (float)Math.Sin(time * 2.0f);
-
-            Vector3 ambientColor = lightColor * new Vector3(2f);
-            Vector3 diffuseColor = lightColor * new Vector3(5f);
-            //Console.WriteLine(mesh.isLight + "  " + id);
             if (mesh.isLight)
-            {
-                //Console.WriteLine(mesh.position.ExtractTranslation());
-                //lightShader.SetVector3("light.position", mesh.position.ExtractTranslation() * new Vector3(1, lightYaxis, 1));
-                
+            {               
                 switch (mesh.lightType)
                 {
                     case LightType.Directional:
@@ -386,7 +360,6 @@ namespace Wafle3D.Core
                         break;
                     case LightType.Point:
                         lightShader.SetVector3($"pointLights[" + mesh.lightId + "].position", mesh.position.ExtractTranslation());
-                        //lightShader.SetFloat("sizePoint[" + mesh.lightId + "].size", 100);
 
                         lightShader.SetInt("PointLightSize", _lightPointCount);
 
@@ -412,19 +385,12 @@ namespace Wafle3D.Core
                         break;
                 }
             }
-            /*lightShader.SetVector3("light.ambient", Vector3.One * 2);
-            lightShader.SetVector3("light.diffuse", new Vector3(0.5f, 0.5f, 0.5f)); // darken the light a bit to fit the scene
-
-            lightShader.SetVector3("light.specular", Vector3.Zero);
-            lightShader.SetFloat("light.constant", 1.0f);
-            lightShader.SetFloat("light.linear", 0.7f);
-            lightShader.SetFloat("light.quadratic", 1.8f);*/
 
             //Binding the vertexes and the buffers, then clearing it, UPDATE => NO EBO/VBO on draw
             GL.BindVertexArray(mesh.vao);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, mesh.ebo);
             
-
+            //Drawing shit
             GL.DrawElements(All.Triangles, mesh.size, All.UnsignedInt, (IntPtr)0);
             GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
             GL.BindVertexArray(0);
@@ -438,25 +404,6 @@ namespace Wafle3D.Core
             //GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.ClearColor(0, 0, 0, 1);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            /*float x = (2.0f * Input.GetAxis("Mouse X")) / Width - 1f;
-            float y = (1.0f - (2.0f * Input.GetAxis("Mouse Y")) / Height);
-            float z = 1.0f;
-            Vector3 ray_nds = new Vector3(x, y, z);
-            Vector4 ray_clip = new Vector4(ray_nds.X, ray_nds.Y, -1.0f, 1.0f);
-            Vector4 ray_eye = Matrix4.Invert(projection) * ray_clip;
-            ray_eye = new Vector4(ray_eye.X, ray_eye.Y, ray_eye.Z, 0.0f);
-            Vector3 ray_wor = (Matrix4.Invert(Matrix4.CreateTranslation(cam.Position)) * ray_eye).Xyz;
-            ray_wor = Vector3.Normalize(ray_wor);
-
-            Vector3 point = new Vector3(x, y, 0f);
-
-            //Raycast ray = new Raycast(cam, projection, Width, Height);
-
-            //SetScale(new Vector3(0.01f, 0.01f, 0.1f), 0);
-            SetPosition(cam.Position * ray_wor, 0);
-            //CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), Matrix4.CreateTranslation(ray_wor), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)));
-            Console.WriteLine(point);*/
 
             if (Input.GetMouseDown(MouseButton.Right))
             {

@@ -33,6 +33,16 @@ namespace Wafle3D.Core.Modules
             this.viewMatrix = Matrix4.CreateTranslation(camera.Position);
         }
 
+        public Vector3 GetRay()
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+            Vector2 normalizedCoords = GetNormalizedCoords(mouseX, mouseY);
+            Vector3 point = new Vector3(normalizedCoords.X * 10, normalizedCoords.Y * 10, 0);
+
+            return point;
+        }
+
         public Vector3 GetCurrentPoint()
         {
             if (intersectionInRange(1, RAY_RANGE, GetCurrentRay()))

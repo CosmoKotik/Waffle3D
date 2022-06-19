@@ -21,9 +21,9 @@ namespace Wafle3D
         public virtual void OnLoad() { }
         public virtual void OnUpdate() { }
 
-        public void CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation, Vector3 scale, LightType type = LightType.nul, Light lightOptions = null)
+        public void CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation, Vector3 scale, ModelMesh parent = null, LightType type = LightType.nul, Light lightOptions = null)
         {
-            gameEngine.CreateObject(mesh, position, rotation, scale, type, lightOptions);
+            gameEngine.CreateObject(mesh, position, rotation, scale, parent, type, lightOptions);
         }
 
         public WafleBehaviour GetBehaviour()

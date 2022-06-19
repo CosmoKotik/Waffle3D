@@ -82,6 +82,7 @@
     <Compile Include="Core\Modules\Raycast.cs" />
     <Compile Include="Core\Modules\Transform.cs" />
     <Compile Include="Scripts\Movement.cs" />
+    <Compile Include="Scripts\raytest.cs" />
     <Compile Include="Scripts\Test.cs" />
     <Compile Include="Core\Behaviour\WafleBehaviour.cs" />
     <Compile Include="Core\WafleEngine.cs" />

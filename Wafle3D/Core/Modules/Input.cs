@@ -64,6 +64,9 @@ namespace Wafle3D.Core
                 case "Mouse Y":
                     output = mouse.Y;
                     break;
+                case "Scroll":
+                    output = (int)mouse.Scroll.Y;
+                    break;
                 case "Keyboard X":
                     /*int aKey = GetKeyDown(Key.A) ? -1 : 0;
                     int dKey = GetKeyDown(Key.D) ? 1 : 0;

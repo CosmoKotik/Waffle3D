@@ -11,7 +11,7 @@ namespace Wafle3D.Core
     {
         static void Main(string[] args)
         {
-            using (WafleEngine game = new WafleEngine(1920, 1080, "Wafle demo", false))
+            using (WafleEngine game = new WafleEngine(1280, 720, "Wafle demo", false))
             {
                 double fps = 60;
                 game.VSync = OpenTK.VSyncMode.Off;

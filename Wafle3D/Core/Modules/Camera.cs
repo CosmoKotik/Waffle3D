@@ -18,6 +18,8 @@ namespace Wafle3D.Core.Modules
 
         public Vector3 Position;
         public Vector3 Rotation;
+
+        public Matrix4 projection;
         private Matrix4 _view;
 
         private Vector3 _lastRotation = Vector3.Zero;
@@ -25,9 +27,17 @@ namespace Wafle3D.Core.Modules
         private float _pitch;
         private bool _is2D;
 
-        public Camera(bool is2D = false)
+        public Camera(int width, int height, bool is2D = false)
         {
             this._is2D = is2D;
+
+            //Creating a camera perspective view
+            projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), width / (float)height, 0.01f, 10000.0f);
+        }
+
+        public Matrix4 GetProjection()
+        {
+            return projection;
         }
 
         public void MoveCamera(Vector3 pos)

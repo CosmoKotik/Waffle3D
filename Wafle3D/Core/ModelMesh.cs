@@ -13,6 +13,8 @@ namespace Wafle3D.Core
     {
         public bool isLight = false;
 
+        public ModelMesh parent;
+
         public float[] vertices = { 0 };
         public int[] indices = { 0 };
         public int size = 0;

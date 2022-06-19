@@ -47,6 +47,7 @@ namespace Wafle3D.Core
         Texture texture;
         Shader shader;
         Shader lightShader;
+        public Raycast raycast;
         Matrix4 projection;
 
 
@@ -96,13 +97,19 @@ namespace Wafle3D.Core
             shader = new Shader(@"Shaders/shader.vert", @"Shaders/shader.frag");
             lightShader = new Shader(@"Shaders/light.vert", @"Shaders/light.frag");
             texture = new Texture();
-            cam = new Camera(_is2D);
+            cam = new Camera(1920, 1080, _is2D);
+            raycast = new Raycast(cam, projection, 1920, 1080);
+
+            cam.MoveCamera(new Vector3(-19.31043f, 0, 0));
+            //cam.RotateCamera(new Vector3(50, 0, 0));
 
             //Creating a camera perspective view
-            projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), Width / (float)Height, 0.01f, 10000.0f);
+            //projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), Width / (float)Height, 0.01f, 10000.0f);
+            projection = cam.GetProjection();
 
             //Adding scripts
             ScriptNames.Add("Movement");
+            ScriptNames.Add("raytest");
 
             for (int i = 0; i < ScriptNames.Count; i++)
             {
@@ -128,28 +135,35 @@ namespace Wafle3D.Core
             GL.Enable(EnableCap.Lighting);
 
             //Adding objects and displaying the id
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
-            CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), new Vector3(0.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
-            CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), new Vector3(10.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
+            ModelMesh prnt = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One);
+
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
+            //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
+            //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
+            //CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), new Vector3(0.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
+            //CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), new Vector3(10.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
 
             //Light point
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
-            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Point, Light.Advanced(Vector3.One, 1, 10, 2));
+            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(Vector3.One, 1, 10, 2));
 
             
 
             //Setting custom textures to the objects
-            SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
-            SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
-            SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
+            //SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
+            //SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
+            //SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
 
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
-            CreateObject(ObjectManager.LoadModel("", ObjectManager.ObjectType.Plane), Vector3.Zero, Vector3.Zero, Vector3.One);
-            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, LightType.Directional, Light.Advanced(Vector3.One, 1, 1, 2));
+            //CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
+            //CreateObject(ObjectManager.LoadModel("", ObjectManager.ObjectType.Plane), Vector3.Zero, Vector3.Zero, Vector3.One);
+            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Directional, Light.Advanced(Vector3.One, 1, 1, 2));
 
             base.OnLoad(e);
         }
@@ -175,7 +189,7 @@ namespace Wafle3D.Core
             base.OnUnload(e);
         }
 
-        public int CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation, Vector3 Scale, LightType type = LightType.nul, Light lightOptions = null)
+        public ModelMesh CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation, Vector3 Scale, ModelMesh parent = null, LightType type = LightType.nul, Light lightOptions = null)
         {
             GL.GenVertexArrays(1, out VertexArrayObject);
             GL.GenBuffers(1, out VertexBufferObject);
@@ -190,6 +204,7 @@ namespace Wafle3D.Core
             mesh.position = Matrix4.CreateTranslation(position);
             mesh.scale = Matrix4.CreateScale(Scale);
             mesh.id = _models.Count;
+            mesh.parent = parent;
 
             if (type != LightType.nul)
             {
@@ -222,18 +237,25 @@ namespace Wafle3D.Core
             CreateVertexBuffer(mesh);
 
             _models.Add(mesh);
-            return mesh.id;
+            return mesh;
         }
 
         public void SetRotation(Vector3 rotation, int id)
         {
-            Matrix4 rot =  Matrix4.Add(Matrix4.Add(
+            /*Matrix4 rot =  Matrix4.Add(Matrix4.Add(
                             Matrix4.CreateRotationX(MathHelper.DegreesToRadians(rotation.X)), 
                             Matrix4.CreateRotationY(MathHelper.DegreesToRadians(rotation.Y))), 
-                            Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(rotation.Z)));
-
+                            Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(rotation.Z)));*/
+            //Matrix4.CreateRotationX(MathHelper.DegreesToRadians(rotation.X)), Matrix4.CreateRotationY(MathHelper.DegreesToRadians(rotation.Y)), Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(rotation.Z))
             //Setting the rotation of an object from the outside
-            _models[id].rotation = rot;
+
+            Matrix4 model = Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(rotation.X)) * Matrix4.CreateRotationY((float)MathHelper.DegreesToRadians(rotation.Y)) * Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(rotation.Z));
+
+            //_models[id].rotation = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(rotation.X)) + Matrix4.CreateRotationY(MathHelper.DegreesToRadians(rotation.Y)) + Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(rotation.Z));
+            _models[id].rotation = model;
+            //_models[id].rotation = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(rotation.Z));
+
+            //Console.WriteLine(_models[id].rotation);
         }
 
         public void SetTexture(string path, int id = 0)
@@ -411,12 +433,15 @@ namespace Wafle3D.Core
                 ky = Input.GetAxis("Keyboard Y");
                 my = Input.GetAxis("Mouse Y") * 0.1f;
                 mx = Input.GetAxis("Mouse X") * 0.1f;
-
+            
                 cam.MoveCamera(new Vector3(kx, 0, ky));
                 cam.RotateCamera(new Vector3(mx, 0, my));
                 Console.WriteLine(cam.Position);
             }
+
             cam.UpdateCamera();
+
+            //Console.WriteLine(raycast.GetRay());
 
             int m_id = 0;
             for (int i = 0; i < _models.Count; i++)
@@ -426,9 +451,24 @@ namespace Wafle3D.Core
                 if (m_id == _models.Count)
                     m_id = 0;
 
-                Matrix4 pos = _models[i].position;
-                Matrix4 rot = _models[i].rotation;
-                Matrix4 scale = _models[i].scale;
+                Matrix4 pos;
+                Matrix4 rot;
+                Matrix4 scale;
+
+                if (_models[i].parent != null)
+                {
+                    pos = _models[i].position * _models[i].parent.position * _models[i].parent.rotation;
+                    rot = _models[i].rotation * _models[i].parent.rotation;
+
+                    Console.Write("PARENT " + _models[i].parent.position);
+                }
+                else 
+                {
+                    pos = _models[i].position;
+                    rot = _models[i].rotation;
+                }
+
+                scale = _models[i].scale;
 
                 int id = _models[i].id;
 

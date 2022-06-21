@@ -16,6 +16,8 @@ public class Movement : WafleBehaviour
         //gameEngine.CreateObject()
     }
 
+    public int IDOffset = 1;
+
     public float x = 0;
     public float y = 0;
     public float z = 0;
@@ -28,24 +30,24 @@ public class Movement : WafleBehaviour
         //go.FindChild();
 
         //Console.WriteLine("OnUpdate");
-        gameEngine.SetRotation(new OpenTK.Vector3(z, z, z), 0);
+        gameEngine.SetRotation(new OpenTK.Vector3(z, z, z), IDOffset - 1);
         //gameEngine.SetPosition(new OpenTK.Vector3(z, 0, 0), 0);
 
-        gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 1);
-        gameEngine.SetPosition(new OpenTK.Vector3(0, x, 0), 2);
-        gameEngine.SetPosition(new OpenTK.Vector3(0, 0, x), 3);
+        gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 1 * IDOffset);
+        gameEngine.SetPosition(new OpenTK.Vector3(0, x, 0), 2 * IDOffset);
+        gameEngine.SetPosition(new OpenTK.Vector3(0, 0, x), 3 * IDOffset);
         
-        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 1);
-        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 2);
-        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 3);
+        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 1 * IDOffset);
+        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 2 * IDOffset);
+        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 3 * IDOffset);
         
-        gameEngine.SetPosition(-new OpenTK.Vector3(x, 0, 0), 4);
-        gameEngine.SetPosition(-new OpenTK.Vector3(0, x, 0), 5);
-        gameEngine.SetPosition(-new OpenTK.Vector3(0, 0, x), 6);
+        gameEngine.SetPosition(-new OpenTK.Vector3(x, 0, 0), 4 * IDOffset);
+        gameEngine.SetPosition(-new OpenTK.Vector3(0, x, 0), 5 * IDOffset);
+        gameEngine.SetPosition(-new OpenTK.Vector3(0, 0, x), 6 * IDOffset);
         
-        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 4);
-        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 5);
-        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 6);
+        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 4 * IDOffset);
+        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 5 * IDOffset);
+        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 6 * IDOffset);
 
         Speed = Input.GetAxis("Scroll");
 

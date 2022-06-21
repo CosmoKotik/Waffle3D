@@ -24,11 +24,9 @@ namespace Wafle3D.Core
     public class WafleEngine : GameWindow
     {
         /*
-         * Code written by: CosmoKotik
+         * Code written by: CosmoKotik;
          * The code isn't best one, but at least something;
          * It is optimized and working fine;
-         * 
-         * Copyright own CosmoKotik, DO NOT COPY
         */
 
         int VertexBufferObject;
@@ -40,8 +38,9 @@ namespace Wafle3D.Core
         private Camera cam;
 
         private List<ModelMesh> _models = new List<ModelMesh>();
-        private int _lightCount = 0;
-        private int _lightPointCount = 0;
+        public int LightCount = 0;
+        public int LightPointCount = 0;
+        public int TotalObjectCount = 0;
         private bool _is2D = false;
 
         Texture texture;
@@ -100,7 +99,8 @@ namespace Wafle3D.Core
             cam = new Camera(1920, 1080, _is2D);
             raycast = new Raycast(cam, projection, 1920, 1080);
 
-            cam.MoveCamera(new Vector3(-19.31043f, 0, 0));
+            cam.MoveCamera(new Vector3(23.31075f, 17.57434f, 26.73849f));
+            cam.RotateCamera(new Vector3(-130.7706f, -26.7f, 0));
             //cam.RotateCamera(new Vector3(50, 0, 0));
 
             //Creating a camera perspective view
@@ -108,8 +108,10 @@ namespace Wafle3D.Core
             projection = cam.GetProjection();
 
             //Adding scripts
-            ScriptNames.Add("Movement");
-            ScriptNames.Add("raytest");
+            //ScriptNames.Add("Movement");
+            ScriptNames.Add("CubeArray1");
+            ScriptNames.Add("CubeArray2");
+            ScriptNames.Add("CubeArray3");
 
             for (int i = 0; i < ScriptNames.Count; i++)
             {
@@ -143,6 +145,24 @@ namespace Wafle3D.Core
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+
+            ModelMesh prnt1 = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(15, 0, 0), new Vector3(0, 0, 0), Vector3.One);
+
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+
+            ModelMesh prnt2 = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(15, 0, 0), new Vector3(0, 0, 0), Vector3.One);
+
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
             //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
             //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
@@ -152,7 +172,10 @@ namespace Wafle3D.Core
             //Light point
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
-            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(Vector3.One, 1, 10, 2));
+            //CreateObject(new ModelMesh(), new Vector3(0, 0, 0), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(new Vector3(0, 100, 0), 0.1f, 1f, 16));
+            CreateObject(new ModelMesh(), new Vector3(0, -5, -5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(1, 0, 0), 1f, 2, 1));
+            CreateObject(new ModelMesh(), new Vector3(0, 10, 0), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(0, 1, 0), 1f, 2, 1));
+            CreateObject(new ModelMesh(), new Vector3(0, -5, 5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(0, 0, 1), 1f, 2, 1));
 
             
 
@@ -163,7 +186,7 @@ namespace Wafle3D.Core
 
             //CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
             //CreateObject(ObjectManager.LoadModel("", ObjectManager.ObjectType.Plane), Vector3.Zero, Vector3.Zero, Vector3.One);
-            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Directional, Light.Advanced(Vector3.One, 1, 1, 2));
+            //CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Directional, Light.Advanced(Vector3.One, 1, 1, 2));
 
             base.OnLoad(e);
         }
@@ -189,6 +212,40 @@ namespace Wafle3D.Core
             base.OnUnload(e);
         }
 
+        public ModelMesh CreateObject(ModelMesh mesh)
+        {
+            GL.GenVertexArrays(1, out VertexArrayObject);
+            GL.GenBuffers(1, out VertexBufferObject);
+            GL.GenBuffers(1, out ElementBufferObject);
+
+
+            if (mesh.isLight)
+            {
+                mesh.lightId = LightCount;
+                switch (mesh.lightType)
+                {
+                    case LightType.Point:
+                        LightPointCount++;
+                        break;
+                }
+
+                LightCount++;
+            }
+
+            mesh.id = _models.Count;
+
+            mesh.vao = VertexArrayObject;
+            mesh.ebo = ElementBufferObject;
+            mesh.vbo = VertexBufferObject;
+
+            CreateVertexBuffer(mesh);
+
+            _models.Add(mesh);
+            TotalObjectCount++;
+
+            return mesh;
+        }
+
         public ModelMesh CreateObject(ModelMesh mesh, Vector3 position, Vector3 rotation, Vector3 Scale, ModelMesh parent = null, LightType type = LightType.nul, Light lightOptions = null)
         {
             GL.GenVertexArrays(1, out VertexArrayObject);
@@ -209,7 +266,7 @@ namespace Wafle3D.Core
             if (type != LightType.nul)
             {
                 mesh.isLight = true;
-                mesh.lightId = _lightCount;
+                mesh.lightId = LightCount;
                 mesh.lightType = type;
 
                 if (lightOptions != null)
@@ -223,11 +280,11 @@ namespace Wafle3D.Core
                 switch (type)
                 {
                     case LightType.Point:
-                        _lightPointCount++;
+                        LightPointCount++;
                         break;
                 }
 
-                _lightCount++;
+                LightCount++;
             }
 
             mesh.vao = VertexArrayObject;
@@ -237,6 +294,18 @@ namespace Wafle3D.Core
             CreateVertexBuffer(mesh);
 
             _models.Add(mesh);
+            TotalObjectCount++;
+
+            return mesh;
+        }
+
+        public ModelMesh DestroyObject(ModelMesh mesh)
+        {
+            GL.DeleteBuffer(mesh.vao);
+            GL.DeleteBuffer(mesh.ebo);
+            _models.Remove(mesh);
+            TotalObjectCount--;
+
             return mesh;
         }
 
@@ -281,7 +350,7 @@ namespace Wafle3D.Core
 
         private void CreateVertexBuffer(ModelMesh mesh) 
         {
-            lightShader.Use();
+            //lightShader.Use();
 
             float[] vertices = mesh.vertices;
             int[] indices = mesh.indices;
@@ -337,7 +406,7 @@ namespace Wafle3D.Core
             //GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
             //GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);
-            Console.WriteLine(texCoordsLocation);
+            //Console.WriteLine(texCoordsLocation);
             texture.loadTexture(tid);
 
         }
@@ -349,6 +418,7 @@ namespace Wafle3D.Core
 
             //Binding texture
             texture.Use();
+            //lightShader.Use();
             texture.BindTexture(id);
 
             //Set Light prop
@@ -370,7 +440,11 @@ namespace Wafle3D.Core
 
             //Set light prop
             if (mesh.isLight)
-            {               
+            {
+                //Refresh light
+                //CreateObject(DestroyObject(mesh));
+
+
                 switch (mesh.lightType)
                 {
                     case LightType.Directional:
@@ -383,16 +457,24 @@ namespace Wafle3D.Core
                     case LightType.Point:
                         lightShader.SetVector3($"pointLights[" + mesh.lightId + "].position", mesh.position.ExtractTranslation());
 
-                        lightShader.SetInt("PointLightSize", _lightPointCount);
+                        lightShader.SetInt("PointLightSize", LightPointCount);
 
-                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].ambient", mesh.color * mesh.intensity); // Light intensity and color
-                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].diffuse", new Vector3(0.5f, 0.5f, 0.5f));
+                        float distance = GetDistanceVec3(mesh.position.ExtractTranslation(), cam.Position);
 
-                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].specular", new Vector3(0.5f, 0.5f, 0.5f));
+                        float constant = 1.0f;
+                        float linear = 0.09f;
+                        float quadratic = 0.032f;
 
-                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].constant", 1.0f);
-                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].linear", 0.7f);
-                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].quadratic", 1.8f);
+                        //float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));
+                        float attenuation = 1.0f;
+
+                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].ambient", (mesh.color * mesh.intensity) * attenuation); // Light intensity and color
+                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].diffuse", new Vector3(0.5f, 0.5f, 0.5f) * attenuation);
+                        lightShader.SetVector3("pointLights[" + mesh.lightId + "].specular", new Vector3(0.5f, 0.5f, 0.5f) * attenuation);
+
+                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].constant", constant);
+                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].linear", linear);
+                        lightShader.SetFloat("pointLights[" + mesh.lightId + "].quadratic", quadratic);
 
                         break;
                     case LightType.Spot:
@@ -419,6 +501,15 @@ namespace Wafle3D.Core
 
         }
 
+        public float GetDistanceVec3(Vector3 target, Vector3 from)
+        {
+            float x = target.X - from.X;
+            float y = target.Y - from.Y;
+            float z = target.Z - from.Z;
+
+            return x + y + z;
+        }
+
         float kx = 0, ky = 0, mx = 0, my = 0;
         
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -436,7 +527,8 @@ namespace Wafle3D.Core
             
                 cam.MoveCamera(new Vector3(kx, 0, ky));
                 cam.RotateCamera(new Vector3(mx, 0, my));
-                Console.WriteLine(cam.Position);
+                Console.WriteLine("pos: " + cam.Position.ToString());
+                Console.WriteLine("rot: " + cam.Rotation.ToString());
             }
 
             cam.UpdateCamera();
@@ -457,10 +549,10 @@ namespace Wafle3D.Core
 
                 if (_models[i].parent != null)
                 {
-                    pos = _models[i].position * _models[i].parent.position * _models[i].parent.rotation;
+                    pos = _models[i].position * _models[i].parent.rotation * _models[i].parent.position;
                     rot = _models[i].rotation * _models[i].parent.rotation;
 
-                    Console.Write("PARENT " + _models[i].parent.position);
+                    //Console.Write("PARENT " + _models[i].parent.position);
                 }
                 else 
                 {

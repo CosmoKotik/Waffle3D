@@ -51,3 +51,30 @@ D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\bin\Debug\Wafle3D.exe
 D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.exe
 D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.csproj.AssemblyReference.cache
 D:\DEV\Visual Sudio Projects\Wafle3D\Wafle3D\obj\Debug\Wafle3D.csproj.SuggestedBindingRedirects.cache
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\Wafle3D.exe.config
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\Wafle3D.exe
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\Wafle3D.pdb
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\AssimpNet.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\OpenTK.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\OpenTK.GLControl.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\SixLabors.ImageSharp.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Buffers.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Memory.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\AssimpNet.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\OpenTK.pdb
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\OpenTK.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\OpenTK.GLControl.pdb
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\OpenTK.GLControl.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\SixLabors.ImageSharp.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Buffers.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Memory.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.AssemblyReference.cache
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.SuggestedBindingRedirects.cache
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CoreCompileInputs.cache
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\obj\Debug\Wafle3D.csproj.CopyComplete
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\obj\Debug\Wafle3D.exe
+C:\Users\CosmoKotik\Documents\GitHub\Waffle3D\Wafle3D\obj\Debug\Wafle3D.pdb

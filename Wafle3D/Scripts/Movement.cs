@@ -1,18 +1,21 @@
-﻿using System;
+﻿using OpenTK;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wafle3D;
 using Wafle3D.Core;
+using Wafle3D.Core.Modules;
+using SimplexNoise;
 
 public class Movement : WafleBehaviour
 {
+    private List<Vector3> _modelsPos = new List<Vector3>();
     public override void OnLoad()
     {
         //Console.WriteLine("mo");
         Console.WriteLine("OnStart");
-
         //gameEngine.CreateObject()
     }
 
@@ -24,46 +27,20 @@ public class Movement : WafleBehaviour
     public bool isGoingBack = false;
     public float Speed = 1f;
 
+    public Vector2 Perlin;
+
+
     public override void OnUpdate()
     {
-        //GameObject go = new GameObject();
-        //go.FindChild();
+        //Simplex.Noise.Seed = 209323094; // Optional
+        int length = 10, width = 15;
+        float scale = 0.10f;
+        //float[,] noiseValues = Simplex.Noise.Calc2D(length, width, scale);
+        Console.WriteLine();
 
-        //Console.WriteLine("OnUpdate");
-        gameEngine.SetRotation(new OpenTK.Vector3(z, z, z), IDOffset - 1);
-        //gameEngine.SetPosition(new OpenTK.Vector3(z, 0, 0), 0);
+        //Random rnd = new Random();
 
-        gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 1 * IDOffset);
-        gameEngine.SetPosition(new OpenTK.Vector3(0, x, 0), 2 * IDOffset);
-        gameEngine.SetPosition(new OpenTK.Vector3(0, 0, x), 3 * IDOffset);
-        
-        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 1 * IDOffset);
-        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 2 * IDOffset);
-        gameEngine.SetRotation(new OpenTK.Vector3(y, y, y), 3 * IDOffset);
-        
-        gameEngine.SetPosition(-new OpenTK.Vector3(x, 0, 0), 4 * IDOffset);
-        gameEngine.SetPosition(-new OpenTK.Vector3(0, x, 0), 5 * IDOffset);
-        gameEngine.SetPosition(-new OpenTK.Vector3(0, 0, x), 6 * IDOffset);
-        
-        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 4 * IDOffset);
-        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 5 * IDOffset);
-        gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 6 * IDOffset);
+       // gameEngine.SetPosition(new OpenTK.Vector3(gameEngine.GetPosition(Id).X, x, gameEngine.GetPosition(Id).Z), Id);
 
-        Speed = Input.GetAxis("Scroll");
-
-        //gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 6);
-        if (x >= 8f)
-            isGoingBack = true;
-        else if (x <= 0.1f)
-            isGoingBack = false;
-
-        if (!isGoingBack)
-            x += 0.1f * Speed;
-        else if (isGoingBack)
-            x -= 0.1f * Speed;
-
-        y += 1f;
-        z += 1f;
-        //GameObject.FindChild().a();
     }
 }

@@ -99,8 +99,9 @@ namespace Wafle3D.Core
             cam = new Camera(1920, 1080, _is2D);
             raycast = new Raycast(cam, projection, 1920, 1080);
 
-            cam.MoveCamera(new Vector3(23.31075f, 17.57434f, 26.73849f));
-            cam.RotateCamera(new Vector3(-130.7706f, -26.7f, 0));
+            cam.MoveCamera(new Vector3(24.95474f, 19.32492f, -28.66815f));
+            cam.RotateCamera(new Vector3(-132f, -27.1f, 0), true);
+            cam.RotateCamera(new Vector3(-132f, -27.1f, 0), true);
             //cam.RotateCamera(new Vector3(50, 0, 0));
 
             //Creating a camera perspective view
@@ -108,26 +109,11 @@ namespace Wafle3D.Core
             projection = cam.GetProjection();
 
             //Adding scripts
-            //ScriptNames.Add("Movement");
+            
             ScriptNames.Add("CubeArray1");
             ScriptNames.Add("CubeArray2");
             ScriptNames.Add("CubeArray3");
-
-            for (int i = 0; i < ScriptNames.Count; i++)
-            {
-                //Invoking the external script
-                Type scriptType = Type.GetType(ScriptNames[i]);
-                ConstructorInfo scriptConstructor = scriptType.GetConstructor(Type.EmptyTypes);
-                WafleBehaviour scriptObject = (WafleBehaviour)scriptConstructor.Invoke(new object[] { });
-
-                Scripts.Add(scriptObject);
-
-                //Setting the gameEngine
-                scriptObject.gameEngine = this;
-                //Calling OnLoad() method
-                scriptObject.OnLoad();
-            }
-
+            
 
             //Enabling DepthTest
             GL.Enable(EnableCap.DepthTest);
@@ -135,6 +121,19 @@ namespace Wafle3D.Core
 
             //Enabling lightning
             GL.Enable(EnableCap.Lighting);
+
+            /*for (int i = 0; i < 50; i++)
+            {
+                Random rnd = new Random();
+
+                int x = rnd.Next(rnd.Next(-75, 0), rnd.Next(0, 75));
+                int y = rnd.Next(0, rnd.Next(-0, 5));
+                int z = rnd.Next(rnd.Next(-75, 0), rnd.Next(0, 75));
+
+                CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(x, y, z), new Vector3(0, 0, 0), Vector3.One, null);
+                ScriptNames.Add("Movement");
+                SetTexture(@"Textures/unknown.png", i);
+            }*/
 
             //Adding objects and displaying the id
             ModelMesh prnt = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One);
@@ -163,6 +162,7 @@ namespace Wafle3D.Core
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+
             //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
             //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
             //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
@@ -173,9 +173,11 @@ namespace Wafle3D.Core
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
             //CreateObject(new ModelMesh(), new Vector3(0, 0, 0), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(new Vector3(0, 100, 0), 0.1f, 1f, 16));
-            CreateObject(new ModelMesh(), new Vector3(0, -5, -5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(1, 0, 0), 1f, 2, 1));
-            CreateObject(new ModelMesh(), new Vector3(0, 10, 0), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(0, 1, 0), 1f, 2, 1));
-            CreateObject(new ModelMesh(), new Vector3(0, -5, 5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(0, 0, 1), 1f, 2, 1));
+            
+            
+            //CreateObject(new ModelMesh(), new Vector3(0, -5, -5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(1, 0, 0), 1f, 2, 1));
+            //CreateObject(new ModelMesh(), new Vector3(0, 10, 0), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(0, 1, 0), 1f, 2, 1));
+            //CreateObject(new ModelMesh(), new Vector3(0, -5, 5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(0, 0, 1), 1f, 2, 1));
 
             
 
@@ -183,10 +185,30 @@ namespace Wafle3D.Core
             //SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
             //SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
             //SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
+            //SetTexture(@"Textures/Untitled2.png", 0);
+            //SetTexture(@"Textures/csharp-e7b8fcd4ce.png", 7);
+            //SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 14);
 
             //CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
             //CreateObject(ObjectManager.LoadModel("", ObjectManager.ObjectType.Plane), Vector3.Zero, Vector3.Zero, Vector3.One);
-            //CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Directional, Light.Advanced(Vector3.One, 1, 1, 2));
+            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Directional, Light.Advanced(Vector3.One, 1, 1.5f, 2));
+
+            for (int i = 0; i < ScriptNames.Count; i++)
+            {
+                //Invoking the external script
+                Type scriptType = Type.GetType(ScriptNames[i]);
+                ConstructorInfo scriptConstructor = scriptType.GetConstructor(Type.EmptyTypes);
+                WafleBehaviour scriptObject = (WafleBehaviour)scriptConstructor.Invoke(new object[] { });
+
+                Scripts.Add(scriptObject);
+
+                //Setting the gameEngine
+                scriptObject.gameEngine = this;
+                scriptObject.ScriptId = i;
+                scriptObject.Id = i;
+                //Calling OnLoad() method
+                scriptObject.OnLoad();
+            }
 
             base.OnLoad(e);
         }
@@ -342,6 +364,11 @@ namespace Wafle3D.Core
             //Set the position of an object from the outside
             _models[id].position = Matrix4.CreateTranslation(position);
         }
+        public Vector3 GetPosition(int id)
+        {
+            //Set the position of an object from the outside
+            return _models[id].position.ExtractTranslation();
+        }
         public void SetScale(Vector3 scale, int id)
         {
             //Set the position of an object from the outside
@@ -462,8 +489,8 @@ namespace Wafle3D.Core
                         float distance = GetDistanceVec3(mesh.position.ExtractTranslation(), cam.Position);
 
                         float constant = 1.0f;
-                        float linear = 0.09f;
-                        float quadratic = 0.032f;
+                        float linear = 0.7f;
+                        float quadratic = 1.8f;
 
                         //float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));
                         float attenuation = 1.0f;

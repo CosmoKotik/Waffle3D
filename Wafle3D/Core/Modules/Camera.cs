@@ -55,7 +55,7 @@ namespace Wafle3D.Core.Modules
             Position += _up * pos.Y;
         }
 
-        public void RotateCamera(Vector3 rot)
+        public void RotateCamera(Vector3 rot, bool force = false)
         {
             if (_is2D)
                 rot = Vector3.Zero;
@@ -68,8 +68,16 @@ namespace Wafle3D.Core.Modules
                 float deltaY = rot.Z - _lastRotation.Z;
                 _lastRotation = new Vector3(rot.X, rot.Y, rot.Z);
 
-                _yaw += deltaX;
-                _pitch -= deltaY;
+                if (force)
+                {
+                    _yaw += deltaX;
+                    _pitch += deltaY;
+                }
+                else
+                {
+                    _yaw += deltaX;
+                    _pitch -= deltaY;
+                }
 
                 Rotation = new Vector3(_yaw, _pitch, 0);
 

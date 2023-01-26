@@ -17,6 +17,8 @@ namespace Wafle3D
         public GameObject gameObject;
 
         public string Name;
+        public int ScriptId;
+        public int Id;
 
         public virtual void OnLoad() { }
         public virtual void OnUpdate() { }

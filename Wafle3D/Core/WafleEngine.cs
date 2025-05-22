@@ -111,8 +111,8 @@ namespace Wafle3D.Core
             //Adding scripts
             
             ScriptNames.Add("CubeArray1");
-            ScriptNames.Add("CubeArray2");
-            ScriptNames.Add("CubeArray3");
+            //ScriptNames.Add("CubeArray2");
+            //ScriptNames.Add("CubeArray3");
             
 
             //Enabling DepthTest
@@ -138,7 +138,7 @@ namespace Wafle3D.Core
             //Adding objects and displaying the id
             ModelMesh prnt = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One);
 
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            /*CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
@@ -161,18 +161,18 @@ namespace Wafle3D.Core
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);*/
 
-            //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
-            //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
-            //CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
-            //CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), new Vector3(0.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
-            //CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), new Vector3(10.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), new Vector3(0.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), new Vector3(10.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
 
             //Light point
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
-            //CreateObject(new ModelMesh(), new Vector3(0, 0, 0), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(new Vector3(0, 100, 0), 0.1f, 1f, 16));
+            CreateObject(new ModelMesh(), new Vector3(0, 0, 0), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(new Vector3(0, 100, 0), 0.1f, 1f, 16));
             
             
             //CreateObject(new ModelMesh(), new Vector3(0, -5, -5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(1, 0, 0), 1f, 2, 1));
@@ -182,9 +182,9 @@ namespace Wafle3D.Core
             
 
             //Setting custom textures to the objects
-            //SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
-            //SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
-            //SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
+            SetTexture(@"Models/Mario64/Toad/Toad_grp.png", 1);
+            SetTexture(@"Models/Mario64/Goomba/GoombaTex.png", 2);
+            SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 3);
             //SetTexture(@"Textures/Untitled2.png", 0);
             //SetTexture(@"Textures/csharp-e7b8fcd4ce.png", 7);
             //SetTexture(@"Models/Mario64/Mario/Mario64Body_alb.png", 14);

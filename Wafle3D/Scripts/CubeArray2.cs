@@ -16,7 +16,7 @@ public class CubeArray2 : WafleBehaviour
         //gameEngine.CreateObject()
     }
 
-    public int IDOffset = 7;
+    public int IDOffset = 0;
 
     public float x = 0;
     public float xx = 0;

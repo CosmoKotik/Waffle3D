@@ -26,7 +26,9 @@ namespace Wafle3D.Core
         /*
          * Code written by: CosmoKotik;
          * The code isn't best one, but at least something;
-         * It is optimized and working fine;
+         * THIS CODE LOOKS BAD;
+         * I WANT TO REWRITE EVERYTHING;
+         * GOD KNOWS WHAT IS HAPPENING HERE - 2025;
         */
 
         int VertexBufferObject;
@@ -99,9 +101,9 @@ namespace Wafle3D.Core
             cam = new Camera(1920, 1080, _is2D);
             raycast = new Raycast(cam, projection, 1920, 1080);
 
-            cam.MoveCamera(new Vector3(24.95474f, 19.32492f, -28.66815f));
-            cam.RotateCamera(new Vector3(-132f, -27.1f, 0), true);
-            cam.RotateCamera(new Vector3(-132f, -27.1f, 0), true);
+            cam.MoveCamera(new Vector3(-24.25273f, 21.09303f, 23.99168f));
+            cam.RotateCamera(new Vector3(-405, -32.2f, 0), true);
+            //cam.RotateCamera(new Vector3(-132f, -27.1f, 0), true);
             //cam.RotateCamera(new Vector3(50, 0, 0));
 
             //Creating a camera perspective view
@@ -137,42 +139,42 @@ namespace Wafle3D.Core
 
             //Adding objects and displaying the id
             ModelMesh prnt = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One);
-
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             /*CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt);*/
 
             ModelMesh prnt1 = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(15, 0, 0), new Vector3(0, 0, 0), Vector3.One);
-
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+            /*CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
-            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);
+            CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt1);*/
 
             ModelMesh prnt2 = CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(15, 0, 0), new Vector3(0, 0, 0), Vector3.One);
-
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
+            /*CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);
             CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, 0, 0), new Vector3(0, 0, 0), Vector3.One, prnt2);*/
 
-            CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
+            /*CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Toad/Toad.obj"), new Vector3(100.0f, 0.0f, -533.0f), new Vector3(0, 0, 0), Vector3.One);
             CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Goomba/Goomba.fbx"), new Vector3(-10.0f, 0.0f, 10.0f), new Vector3(0, 0, 0), Vector3.One);
             CreateObject(ObjectManager.LoadModel(@"Models/Mario64/Mario/Mario.fbx"), new Vector3(150.0f, 0.0f, -422.0f), new Vector3(0, 0, 0), Vector3.One);
             CreateObject(ObjectManager.LoadModel(@"Models/Random/gun.fbx"), new Vector3(0.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
-            CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), new Vector3(10.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);
+            CreateObject(ObjectManager.LoadModel(@"Models/Random/Spaceshit.fbx"), new Vector3(10.0f, 0.0f, -0.0f), new Vector3(0, 0, 0), Vector3.One);*/
 
             //Light point
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, 5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Point);
             //CreateObject(new ModelMesh(), Matrix4.CreateTranslation(0, -5, 2), Matrix4.CreateRotationX(MathHelper.DegreesToRadians(0)), LightType.Directional);
-            CreateObject(new ModelMesh(), new Vector3(0, 0, 0), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(new Vector3(0, 100, 0), 0.1f, 1f, 16));
+            CreateObject(new ModelMesh(), new Vector3(0, 0, 0), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Point, Light.Advanced(new Vector3(100, 100, 100), 0.5f, .2f, 1));
             
             
             //CreateObject(new ModelMesh(), new Vector3(0, -5, -5), new Vector3(0, 0, 0), Vector3.One * 0.1f, null, LightType.Point, Light.Advanced(new Vector3(1, 0, 0), 1f, 2, 1));
@@ -191,7 +193,7 @@ namespace Wafle3D.Core
 
             //CreateObject(ObjectManager.LoadModel(@"Models/Cube.fbx"), new Vector3(0.0f, -3.0f, -4.0f), new Vector3(0, 0, 0), Vector3.One);
             //CreateObject(ObjectManager.LoadModel("", ObjectManager.ObjectType.Plane), Vector3.Zero, Vector3.Zero, Vector3.One);
-            CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Directional, Light.Advanced(Vector3.One, 1, 1.5f, 2));
+            //CreateObject(new ModelMesh(), new Vector3(0, -5, 2), new Vector3(0, 0, 0), Vector3.One * 1, null, LightType.Directional, Light.Advanced(Vector3.One, 1, 1.5f, 2));
 
             for (int i = 0; i < ScriptNames.Count; i++)
             {

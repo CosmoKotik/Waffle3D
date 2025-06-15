@@ -53,6 +53,8 @@ public class CubeArray1 : WafleBehaviour
         gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 5 + IDOffset);
         gameEngine.SetRotation(-new OpenTK.Vector3(y, y, y), 6 + IDOffset);
 
+        Console.WriteLine($"x: {x} y: {y} z: {z}");
+
         Speed = Input.GetAxis("Scroll");
 
         //gameEngine.SetPosition(new OpenTK.Vector3(x, 0, 0), 6);
